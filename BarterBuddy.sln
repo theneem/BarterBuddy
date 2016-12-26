@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Presentation.Web", "BarterBuddy.Presentation.Web\BarterBuddy.Presentation.Web.csproj", "{3EC2FF04-8819-42EF-BCBD-8F6C67AC298A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Business", "BarterBuddy.Business\BarterBuddy.Business.csproj", "{E0CFCEC7-CA69-4EF7-9364-0755B3C9CDFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Data", "BarterBuddy.Data\BarterBuddy.Data.csproj", "{A868285A-EBA9-47ED-927C-B99E7497669E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Common", "BarterBuddy.Common\BarterBuddy.Common.csproj", "{8BBBD742-D345-49B9-B789-50E413EB290D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EC2FF04-8819-42EF-BCBD-8F6C67AC298A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC2FF04-8819-42EF-BCBD-8F6C67AC298A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC2FF04-8819-42EF-BCBD-8F6C67AC298A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC2FF04-8819-42EF-BCBD-8F6C67AC298A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0CFCEC7-CA69-4EF7-9364-0755B3C9CDFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0CFCEC7-CA69-4EF7-9364-0755B3C9CDFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0CFCEC7-CA69-4EF7-9364-0755B3C9CDFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0CFCEC7-CA69-4EF7-9364-0755B3C9CDFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A868285A-EBA9-47ED-927C-B99E7497669E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A868285A-EBA9-47ED-927C-B99E7497669E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A868285A-EBA9-47ED-927C-B99E7497669E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A868285A-EBA9-47ED-927C-B99E7497669E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BBBD742-D345-49B9-B789-50E413EB290D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BBBD742-D345-49B9-B789-50E413EB290D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BBBD742-D345-49B9-B789-50E413EB290D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BBBD742-D345-49B9-B789-50E413EB290D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
