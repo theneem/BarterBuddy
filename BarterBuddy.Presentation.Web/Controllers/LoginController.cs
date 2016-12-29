@@ -11,7 +11,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
     [HandleError]
     public class LoginController : Controller
     {
-      
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseController" /> class.
         /// </summary>
@@ -22,6 +22,13 @@ namespace BarterBuddy.Presentation.Web.Controllers
         {
             ViewBag.ReturnUrl = returnUrl;
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult ValidateUserLogin(string email, string password)
+        {
+
+            return new JsonResult();
         }
     }
 }
