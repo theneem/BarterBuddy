@@ -10,11 +10,15 @@ using System.Web.Routing;
 using BarterBuddy.Common.Helper;
 using BarterBuddy.Common.Rest;
 using BarterBuddy.Presentation.Web.Common;
+using log4net;
+using log4net.Config;
 
 namespace BarterBuddy.Presentation.Web.Controllers
 {
     public class BaseController : Controller
     {
+        public static readonly ILog Logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         /// <summary>
         /// The aladdin rest client
         /// </summary>
@@ -25,6 +29,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
         /// </summary>
         public BaseController()
         {
+            XmlConfigurator.Configure();
             var aladdinUrl = ConfigurationManager.AppSettings[Constant.GETURL];
             aladdinRestClient = new RestClient(aladdinUrl);
         }
@@ -70,7 +75,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
                         // simply displays a temporary 5 second notification that they have timed out, and
                         // will, in turn, redirect to the logon page.
 
-                        if (ctx.Request.Url.ToString().Contains("/WorkOrder/NewWorkRequest?id="))
+                        if (ctx.Request.Url.ToString().Contains("/admin/adminpanel?id="))
                         {
                             // string companyId = HttpUtility.ParseQueryString(ctx.Request.Url.ToString())["id"];
                             // filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "Controller", "WorkOrder" }, { "Action", "NewWorkRequest" }, { "id", companyId } });
@@ -87,7 +92,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
 
                             filterContext.Result =
                                     new RedirectToRouteResult(
-                                        new RouteValueDictionary { { "Controller", "Login" }, { "Action", "Index" }, { "returnUrl", returnUrl } });
+                                        new RouteValueDictionary { { "Controller", "Account" }, { "Action", "Login" }, { "returnUrl", returnUrl } });
                         }
                     }
                 }

@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Data", "BarterB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarterBuddy.Common", "BarterBuddy.Common\BarterBuddy.Common.csproj", "{8BBBD742-D345-49B9-B789-50E413EB290D}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLLs", "DLLs", "{C1AE28B5-7D65-4C22-9DD6-19B699603BC7}"
+	ProjectSection(SolutionItems) = preProject
+		DLLs\log4net.dll = DLLs\log4net.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
