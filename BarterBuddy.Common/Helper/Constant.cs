@@ -8,6 +8,8 @@ namespace BarterBuddy.Common.Helper
 {
     public class Constant
     {
-        public static string GETURL = "BartuAPIUrl";
+        public static string GETURL = "BarterAPIURL";
+
+        public static string VALIDATEUSERLOGIN = "Login/ValidateUserLogin/{0}";
     }
 }

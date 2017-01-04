@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BarterBuddy.Data.IData
 {
-    interface ILoginDataRepository
+    public interface ILoginDataRepository
     {
     }
 }

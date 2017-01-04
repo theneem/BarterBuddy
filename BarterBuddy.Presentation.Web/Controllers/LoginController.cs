@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using BarterBuddy.Common.Helper;
+using BarterBuddy.Model;
+using BarterBuddy.Presentation.Web.Models;
 using log4net;
 using log4net.Config;
 
 namespace BarterBuddy.Presentation.Web.Controllers
 {
-    [HandleError]
-    public class LoginController : Controller
+
+    public class LoginController : BaseController
     {
 
         /// <summary>
@@ -24,10 +28,12 @@ namespace BarterBuddy.Presentation.Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
-        public ActionResult ValidateUserLogin(string email, string password)
+        public async Task<JsonResult> ValidateUserLogin()
         {
-
+            var data = new LoginViewModel { Email = "parimal.loliyaniya@gmail.com" };
+            var result = await aladdinRestClient.PostAsync<LoginViewModel, ResponseHelper>(Constant.VALIDATEUSERLOGIN, data, data);
             return new JsonResult();
         }
     }

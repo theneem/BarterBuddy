@@ -1,7 +1,10 @@
 using System;
+using BarterBuddy.Business;
+using BarterBuddy.Business.IBusness;
+using BarterBuddy.Data;
+using BarterBuddy.Data.IData;
 using BarterBuddy.Presentation.Web.Controllers;
 using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 
 namespace BarterBuddy.Presentation.Web.App_Start
 {
@@ -36,8 +39,12 @@ namespace BarterBuddy.Presentation.Web.App_Start
             // NOTE: To load from web.config uncomment the line below. Make sure to add a Microsoft.Practices.Unity.Configuration to the using statements.
             // container.LoadConfiguration();
             container.RegisterType<AccountController>(new InjectionConstructor());
+
+            //TODO: Register your Business Unity Resolver
+            container.RegisterType<ILoginBusinessManager, LoginBusinessManager>();
+
             // TODO: Register your types here
-            // container.RegisterType<IProductRepository, ProductRepository>();
+            container.RegisterType<ILoginDataRepository, LoginDataRepository>();
         }
     }
 }

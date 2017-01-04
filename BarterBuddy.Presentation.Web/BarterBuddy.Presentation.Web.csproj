@@ -108,12 +108,20 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -242,6 +250,7 @@
     <Compile Include="Common\SiteSession.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -256,10 +265,91 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\settings.css" />
+    <Content Include="Content\slick.css" />
+    <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\arrow-3.png" />
+    <Content Include="Images\arrow-hvr.png" />
+    <Content Include="Images\arrow-land.png" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\book.png" />
+    <Content Include="Images\boy-2.png" />
+    <Content Include="Images\boy-3.png" />
+    <Content Include="Images\boy-4.png" />
+    <Content Include="Images\boy-a-1.png" />
+    <Content Include="Images\boy-a-3.png" />
+    <Content Include="Images\boy-a.png" />
+    <Content Include="Images\boy-q-4.png" />
+    <Content Include="Images\boy.png" />
+    <Content Include="Images\ccd.png" />
+    <Content Include="Images\check-box-checked.jpg" />
+    <Content Include="Images\check-box.jpg" />
+    <Content Include="Images\close.png" />
+    <Content Include="Images\cradit-2.png" />
+    <Content Include="Images\crossword.png" />
+    <Content Include="Images\email.png" />
+    <Content Include="Images\eng-hvr.png" />
+    <Content Include="Images\eng.png" />
+    <Content Include="Images\fb.png" />
+    <Content Include="Images\fbm.png" />
+    <Content Include="Images\girl-2.png" />
+    <Content Include="Images\girl-3.png" />
+    <Content Include="Images\girl-4.png" />
+    <Content Include="Images\girl-a-4.png" />
+    <Content Include="Images\girl-q-1.png" />
+    <Content Include="Images\girl-q-2.png" />
+    <Content Include="Images\girl-q.png" />
+    <Content Include="Images\girl.png" />
+    <Content Include="Images\google.png" />
+    <Content Include="Images\gujarat.png" />
+    <Content Include="Images\igm.png" />
+    <Content Include="Images\kids-hvr.png" />
+    <Content Include="Images\kids.png" />
+    <Content Include="Images\landing-img.png" />
+    <Content Include="Images\linkm.png" />
+    <Content Include="Images\logIn-hvr.png" />
+    <Content Include="Images\login-slide.png" />
+    <Content Include="Images\logIn.png" />
+    <Content Include="Images\logo-landing.png" />
+    <Content Include="Images\logo-old.png" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\madi-hvr.png" />
+    <Content Include="Images\madi.png" />
+    <Content Include="Images\mail.png" />
+    <Content Include="Images\map-loc.png" />
+    <Content Include="Images\map.png" />
+    <Content Include="Images\msg-2-1.png" />
+    <Content Include="Images\msg-2-2.png" />
+    <Content Include="Images\name.png" />
+    <Content Include="Images\old-title-2.png" />
+    <Content Include="Images\old-title-white.png" />
+    <Content Include="Images\old-title.png" />
+    <Content Include="Images\prof-hvr.png" />
+    <Content Include="Images\prof.png" />
+    <Content Include="Images\pwd.png" />
+    <Content Include="Images\que-1.png" />
+    <Content Include="Images\que-2.png" />
+    <Content Include="Images\school-hvr.png" />
+    <Content Include="Images\school.png" />
+    <Content Include="Images\sci-hvr.png" />
+    <Content Include="Images\sci.png" />
+    <Content Include="Images\slide-2-line.png" />
+    <Content Include="Images\slider-1.jpg" />
+    <Content Include="Images\slider-2.jpg" />
+    <Content Include="Images\slider-3.jpg" />
+    <Content Include="Images\slider-4.jpg" />
+    <Content Include="Images\table-2.png" />
+    <Content Include="Images\table.png" />
+    <Content Include="Images\tea-spot-1.png" />
+    <Content Include="Images\tea-spot.png" />
+    <Content Include="Images\twm.png" />
+    <Content Include="Images\whatsup-slide.png" />
+    <Content Include="Images\whatsup.png" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -267,10 +357,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\BarterBuddy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.mCustomScrollbar.min.js" />
+    <Content Include="Scripts\jquery.themepunch.plugins.min.js" />
+    <Content Include="Scripts\jquery.themepunch.revolution.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -278,8 +373,11 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\slick.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -304,6 +402,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_BlankLayout.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Shared\DraggebleMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,13 +413,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BarterBuddy.Business\BarterBuddy.Business.csproj">
+      <Project>{e0cfcec7-ca69-4ef7-9364-0755b3c9cdfb}</Project>
+      <Name>BarterBuddy.Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BarterBuddy.Common\BarterBuddy.Common.csproj">
       <Project>{8BBBD742-D345-49B9-B789-50E413EB290D}</Project>
       <Name>BarterBuddy.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BarterBuddy.Data\BarterBuddy.Data.csproj">
+      <Project>{a868285a-eba9-47ed-927c-b99e7497669e}</Project>
+      <Name>BarterBuddy.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BarterBuddy.Model\BarterBuddy.Model.csproj">
+      <Project>{be8e8bb1-7c08-4990-a386-2231f722f621}</Project>
+      <Name>BarterBuddy.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

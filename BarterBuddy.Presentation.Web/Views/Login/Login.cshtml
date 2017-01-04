@@ -1,60 +1,695 @@
 ﻿@using BarterBuddy.Presentation.Web.Models
-@model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    @Html.Partial("_BlankLayout")
 }
 
 <h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("ValidateUserLogin", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
+<div class="home">
+    <div class="wrapper">
+        <header>
+            <div class="headerMain">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 logoMain">
+                            <a href="index.html" title="Barter Buddy"><img src="~/images/logo.png" alt="Barter Buddy" /></a>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12 LoginRight">
+                            <div class="loginMain">
+                                <a href="#" title="Login" class="trans logBtn">Login</a>
+                                <div class="bg"></div>
+                                <div class="popup">
+                                    <div class="close"></div>
+                                    <div class="verCenter">
+                                        <div class="mainTabing">
+                                            <ul class="detailTab">
+                                                <li class="tabing current" data-tab="tab-1">Login</li>
+                                                <li class="tabing" data-tab="tab-2">Registration</li>
+                                            </ul>
+                                            <div class="accMainDiv">
+                                                <div class="accoContain current in" id="tab-1">
+                                                    <div class="formHere">
+                                                        <form id="login" name="loginForm" method="post" onsubmit="return false;">
+                                                            <ul class="loginForm">
+                                                                <li class="emailMain">
+                                                                    <div class="txtMain">
+                                                                        <span class="placeSpan">Email</span>
+                                                                        <input type="email" name="txtlname" id="txtemail" class="txt" title="Email" />
+                                                                    </div>
+                                                                </li>
+                                                                <li class="whatsUpMain">
+                                                                    <div class="txtMain">
+                                                                        <span class="placeSpan">Whatsapp Number</span>
+                                                                        <input type="tel" name="txtphone" id="txtwnum" class="txt" title="Whatsapp Number" maxlength="10" />
+                                                                    </div>
+                                                                </li>
+                                                                <li class="btnLi">
+                                                                    <button type="submit" title="Login" class="subBtn trans" id="submit_Btn"><span>Login</span></button>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="linkDir">
+                                                                <li><a href="#" target="_blank" title="Facebook" class="fb">Login with facebook</a></li>
+                                                                <li><a href="#" target="_blank" title="Google" class="google">Login with Google</a></li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="accoContain" id="tab-2">
+                                                    <div class="formHere">
+                                                        <form id="regis" name="regForm" method="post" onsubmit="return false;">
+                                                            <ul class="loginForm regForm">
+                                                                <li class="emailMain">
+                                                                    <div class="txtMain">
+                                                                        <span class="placeSpan">Email</span>
+                                                                        <input type="email" name="txtlname" id="regEmail" class="txt" title="Email" />
+                                                                    </div>
+                                                                </li>
+                                                                <li class="pwdMain">
+                                                                    <div class="txtMain">
+                                                                        <span class="placeSpan ">Password</span>
+                                                                        <input type="password" name="txtfname" id="regName" class="txt" title="Password" />
+                                                                    </div>
+                                                                </li>
+                                                                <li class="whatsUpMain">
+                                                                    <div class="txtMain">
+                                                                        <span class="placeSpan">Whatsapp Number (optional)</span>
+                                                                        <input type="tel" name="txtphone" id="regNum" class="txt" title="Whatsapp Number" maxlength="10" />
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <input id="c1" name="cc" type="checkbox">
+                                                                    <label for="c1"><span></span>By Registering on BarterBuddy, you accept <a href="#" title="Terms & Conditions">Terms & Conditions</a></label>
+                                                                </li>
+                                                                <li class="btnLi">
+                                                                    <button type="submit" title="Register" class="subBtn trans"><span>Register</span></button>
+                                                                </li>
+                                                            </ul>
+                                                            <ul class="linkDir regDir">
+                                                                <li><a href="#" target="_blank" title="Facebook" class="fb">Register with facebook</a></li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="menuMain">
+                                <div class="menuIcon">
+                                    <span class="oneS"></span>
+                                    <span class="twoS"></span>
+                                    <span class="treS"></span>
+                                </div>
+                                <div class="menuHere">
+                                   @Html.Partial("DraggebleMenu");
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
+            </div>
+        </header>
+        <section>
+            <div class="centerMain">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12 blueMain ">
+                            <div class="table-full">
+                                <div class="verMiddle">
+                                    <div class="slickMain">
+                                        <ul class="rslides" id="slider">
+                                            <li>
+                                                <div class="verCenter">
+                                                    <div class="blueCon mCustomScrollbar">
+                                                        <div class="comBlue">
+                                                            <a href="#" title="Engineering" class="figA">
+                                                                <figure>
+                                                                    <img src="@Url.Content("~/Images/eng.png")" alt="Engineering">
+                                                                    <img src="@Url.Content("~/Images/eng-hvr.png")" class="hoverImg" alt="Engineering">
+                                                                    <figcaption>Engineering</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                        <div class="comBlue">
+                                                            <a href="#" title="Medical" class="figA">
+                                                                <figure>
+                                                                    <img src="@Url.Content("~/images/madi.png")" alt="Medical">
+                                                                    <img src="@Url.Content("~/images/madi-hvr.png")" class="hoverImg" alt="Medical">
+                                                                    <figcaption>Medical</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                        <div class="comBlue">
+                                                            <a href="#" title="School" class="figA">
+                                                                <figure>
+                                                                    <img src="@Url.Content("~/Images/school.png")"  alt="School">
+                                                                    <img src="@Url.Content("~/images/school-hvr.png")" class="hoverImg" alt="School">
+                                                                    <figcaption>School</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                        <div class="comBlue">
+                                                            <a href="#" title="Science" class="figA">
+                                                                <figure>
+                                                                    <img src= "@Url.Content("~/Images/sci.png")"  alt="Science">
+                                                                    <img src= "@Url.Content("~/Images/sci-hvr.png")" class="hoverImg" alt="Science">
+                                                                    <figcaption>Science</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                        <div class="comBlue">
+                                                            <a href="#" title="Kids" class="figA">
+                                                                <figure>
+                                                                    <img src="@Url.Content("~/Images/kids.png")" alt="Kids">
+                                                                    <img src="@Url.Content("~/Images/kids-hvr.png")" class="hoverImg" alt="Kids">
+                                                                    <figcaption>Kids</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                        <div class="comBlue">
+                                                            <a href="#" title="Engineering" class="figA">
+                                                                <figure>
+                                                                    <img src="@Url.Content("~/Images/prof.png")" alt="Professionals">
+                                                                    <img src="@Url.Content("~/Images/prof-hvr.png")" class="hoverImg" alt="Professionals">
+                                                                    <figcaption>Professionals</figcaption>
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="moreLinks">
+                                                        <a href="#" title="Biographies" class="trans linkMain">Biographies</a>
+                                                        <a href="#" title="Romance" class="trans linkMain">Romance</a>
+                                                        <a href="#" title="Spirituality" class="trans linkMain">Spirituality</a>
+                                                        <a href="#" title="More" class="trans linkMain">More...</a>
+                                                    </div>
+                                                </div>
+                                                <div class="mainLib"><span>Library</span></div>
+                                            </li>
+
+                                            <li>
+                                                <div class="verCenter">
+                                                    <div class="formHere">
+                                                        <div class="formTitleSlide">
+                                                            Log In <span>today!</span>
+                                                        </div>
+                                                        <form id="loginForm">
+                                                            <ul class="loginForm">
+                                                                <li class="emailSlide"><input type="text" class="inputBox" placeholder="EMAIL" name="email" /></li>
+                                                                <li class="wappSlide"><input type="text" class="inputBox" placeholder="WHATS APP NUMBER" name="whatNum" /></li>
+                                                                <li class="submitMain"><button type="submit" class="subbtnMain"><span>Login</span></button></li>
+                                                            </ul>
+                                                            <ul class="linkDir">
+                                                                <li><a href="#" target="_blank" title="Facebook" class="fb">Login with facebook</a></li>
+                                                                <li><a href="#" target="_blank" title="Google" class="google">Login with Google</a></li>
+                                                            </ul>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                                <div class="mainLib"><span>Login</span></div>
+                                            </li>
+                                            <li>
+                                                <div class="verCenter">
+                                                    <div class="mapCover">
+                                                        <div class="mapMain">
+                                                            <img src="@Url.Content("~/Images/gujarat.png")" alt="Gujarat" />
+                                                        </div>
+                                                        <div class="locationMain">
+                                                            <div class="locName"><span>We are Available at</span>Ahmedabad, Vadodara & Rajkot</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mainLib"><span>Location</span></div>
+                                            </li>
+                                            <li class="mapYellow">
+                                                <div class="verCenter">
+                                                    <div class="mapCover">
+                                                        <div class="locationMain">
+                                                            <div class="locName"><span>Searching Books</span>Find Nearest Location Around</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mainLib"><span>Locate Us</span></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12 yellowMain">
+                            <div class="verMiddle">
+                                <div class="tp-banner-container">
+                                    <div class="tp-banner">
+                                        <ul>
+                                            <!-- SLIDE  -->
+                                            <li class="slideMain" data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+                                                <!-- MAIN IMAGE -->
+                                                <img src="@Url.Content("~/Images/slider-1.jpg")" alt="slide-1" data-bgfit="cover" data-bgposition="bottom left" data-bgrepeat="no-repeat">
+                                                <!-- LAYERS -->
+                                                <div class="tp-caption sfl start tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-100"
+                                                     data-y="bottom"
+                                                     data-voffset="110"
+                                                     data-speed="800"
+                                                     data-start="1500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 3">
+                                                    <img src="@Url.Content("~/Images/girl.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption sfr tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="170"
+                                                     data-y="bottom"
+                                                     data-voffset="110"
+                                                     data-speed="800"
+                                                     data-start="2500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 3">
+                                                    <img src="@Url.Content("~/Images/boy.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-220"
+                                                     data-y="center"
+                                                     data-voffset="-80"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="3000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/girl-q-1.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-40"
+                                                     data-y="top"
+                                                     data-voffset="0"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="5000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/boy-a-1.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="50"
+                                                     data-y="center"
+                                                     data-voffset="-70"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="1500"
+                                                     data-start="7000"
+                                                     data-easing="Power3.easeInOut"
+                                                     data-endspeed="300"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/book.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption sft tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="35"
+                                                     data-y="top"
+                                                     data-voffset="-55"
+                                                     data-speed="1500"
+                                                     data-start="8000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 3">
+                                                    <img src="@Url.Content("~/Images/old-title.png")" alt="">
+                                                </div>
+
+                                            </li>
+                                            <li class="slideMain" data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+                                                <!-- MAIN IMAGE -->
+                                                <img src="@Url.Content("~/Images/slider-2.jpg")" alt="slide-2" data-bgfit="cover" data-bgposition="bottom left" data-bgrepeat="no-repeat">
+                                                <!-- LAYERS -->
+                                                <div class="tp-caption lfb start tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="120"
+                                                     data-y="bottom"
+                                                     data-voffset="55"
+                                                     data-speed="800"
+                                                     data-start="1500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 4">
+                                                    <img src="@Url.Content("~/Images/table-2.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption sfl tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-200"
+                                                     data-y="bottom"
+                                                     data-voffset="65"
+                                                     data-speed="800"
+                                                     data-start="2500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 2">
+                                                    <img src="@Url.Content("~/Images/girl-3.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="10"
+                                                     data-y="bottom"
+                                                     data-voffset="-65"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="3000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/girl-q-2.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="70"
+                                                     data-y="top"
+                                                     data-voffset="70"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="4000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/cradit-2.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption lfr tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="40"
+                                                     data-y="bottom"
+                                                     data-voffset="65"
+                                                     data-speed="800"
+                                                     data-start="5000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/boy-3.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-100"
+                                                     data-y="top"
+                                                     data-voffset="-60"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="6000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/boy-a-3.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption fade tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="110"
+                                                     data-y="center"
+                                                     data-voffset="30"
+                                                     data-speed="1500"
+                                                     data-start="7000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 6">
+                                                    <img src="@Url.Content("~/Images/arrow-3.png")" alt="">
+                                                </div>
+
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="10"
+                                                     data-y="center"
+                                                     data-voffset="-60"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="8000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 9">
+                                                    <img src="@Url.Content("~/Images/msg-2-2.png")" alt="">
+                                                </div>
+                                            </li>
+                                            <li class="slideMain" data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+                                                <!-- MAIN IMAGE -->
+                                                <img src="@Url.Content("~/Images/slider-3.jpg")" alt="slide-2" data-bgfit="cover" data-bgposition="bottom left" data-bgrepeat="no-repeat">
+                                                <!-- LAYERS -->
+                                                <div class="tp-caption lfb start tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="30"
+                                                     data-y="bottom"
+                                                     data-voffset="40"
+                                                     data-speed="800"
+                                                     data-start="1500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 4">
+                                                    <img src="@Url.Content("~/Images/table.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption sfr tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-30"
+                                                     data-y="top"
+                                                     data-voffset="30"
+                                                     data-speed="800"
+                                                     data-start="1500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 3">
+                                                    <img src="@Url.Content("~/Images/ccd.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption lfr tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-80"
+                                                     data-y="bottom"
+                                                     data-voffset="30"
+                                                     data-speed="800"
+                                                     data-start="2500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 2">
+                                                    <img src="@Url.Content("~/Images/girl-2.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption lfl tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-40"
+                                                     data-y="bottom"
+                                                     data-voffset="30"
+                                                     data-speed="800"
+                                                     data-start="2500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/mages/boy-2.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="120"
+                                                     data-y="top"
+                                                     data-voffset="-30"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="3000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/girl-q.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-200"
+                                                     data-y="center"
+                                                     data-voffset="-130"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="5000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/boy-a.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption fade tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="80"
+                                                     data-y="bottom"
+                                                     data-voffset="80"
+                                                     data-speed="1500"
+                                                     data-start="5500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 1">
+                                                    <img src="@Url.Content("~/Images/slide-2-line.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="45"
+                                                     data-y="center"
+                                                     data-voffset="-5"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="1500"
+                                                     data-start="6500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/tea-spot.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="10"
+                                                     data-y="center"
+                                                     data-voffset="120"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="1500"
+                                                     data-start="7500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/crossword.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="50"
+                                                     data-y="bottom"
+                                                     data-voffset="55"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="1500"
+                                                     data-start="8500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/tea-spot-1.png")" alt="">
+                                                </div>
+                                            </li>
+                                            <li class="slideMain" data-transition="fade" data-slotamount="7" data-masterspeed="1500">
+                                                <!-- MAIN IMAGE -->
+                                                <img src="@Url.Content("~/Images/slider-4.jpg")" alt="slide-2" data-bgfit="cover" data-bgposition="bottom left" data-bgrepeat="no-repeat">
+                                                <!-- LAYERS -->
+                                                <div class="tp-caption sfl tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="190"
+                                                     data-y="bottom"
+                                                     data-voffset="85"
+                                                     data-speed="800"
+                                                     data-start="1500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 2">
+                                                    <img src="@Url.Content("~/Images/boy-4.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="left"
+                                                     data-hoffset="50"
+                                                     data-y="top"
+                                                     data-voffset="-20"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="2500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/boy-q-4.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption sfr tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-40"
+                                                     data-y="bottom"
+                                                     data-voffset="75"
+                                                     data-speed="800"
+                                                     data-start="4500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/girl-4.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption customin tp-resizeme"
+                                                     data-x="right"
+                                                     data-hoffset="-230"
+                                                     data-y="top"
+                                                     data-voffset="-30"
+                                                     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;opacity:0;transformPerspective:600;transformOrigin:50% 50%;"
+                                                     data-speed="3000"
+                                                     data-start="5500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 5">
+                                                    <img src="@Url.Content("~/Images/girl-a-4.png")" alt="">
+                                                </div>
+                                                <div class="tp-caption fade tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="-50"
+                                                     data-y="center"
+                                                     data-voffset="-30"
+                                                     data-speed="1500"
+                                                     data-start="3500"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 1">
+                                                    <img src="@Url.Content("~/Images/que-1.png")" alt="" />
+                                                </div>
+                                                <div class="tp-caption fade tp-resizeme"
+                                                     data-x="center"
+                                                     data-hoffset="0"
+                                                     data-y="center"
+                                                     data-voffset="-30"
+                                                     data-speed="1500"
+                                                     data-start="4000"
+                                                     data-easing="Power4.easeOut"
+                                                     data-endspeed="500"
+                                                     data-endeasing="Power4.easeIn"
+                                                     style="z-index: 1">
+                                                    <img src="@Url.Content("~/Images/que-2.png")" alt="" />
+                                                </div>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
+            </div>
         </section>
-    </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
+        <footer>
+            <div class="footerMain">
+                <div class="container-fluid">
+                    <div class="col-md-6 col-xs-12 col-sm-6 copyMain">
+                        <div class="copyRight">
+                            <span> &copy; Buy Sale Books.com - </span><a href="#" title="Privacy Policy" class="trans">Privacy Policy</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6 workMain">
+                        <div class="howWork"><a href="#" class="trans howW">How it works...</a></div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 </div>
 

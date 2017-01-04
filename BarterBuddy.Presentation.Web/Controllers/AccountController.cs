@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BarterBuddy.Presentation.Web.Models;
+using BarterBuddy.Common.Helper;
 
 namespace BarterBuddy.Presentation.Web.Controllers
 {
@@ -52,8 +53,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
             }
         }
 
-
-
+       
 
         //
         // GET: /Account/Register

@@ -21,6 +21,7 @@ namespace BarterBuddy.Common.Rest
         protected HttpClient httpClient = null;
 
         protected string baseUrl;
+
         //const string UserInfoHeader = "UserInfo";
         //private IServiceAuthenticationHelper _serviceAuthenticationHelper;
 
@@ -847,6 +848,7 @@ namespace BarterBuddy.Common.Rest
         /// This function will add accesstoken and userinfo in header.
         /// </summary>
         /// 
+
         //private void AddHeadersToHttpClient()
         //{
         //    lock (thisObject)

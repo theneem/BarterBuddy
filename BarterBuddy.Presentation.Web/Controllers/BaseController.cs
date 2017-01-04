@@ -29,7 +29,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
         /// </summary>
         public BaseController()
         {
-            XmlConfigurator.Configure();
+           
             var aladdinUrl = ConfigurationManager.AppSettings[Constant.GETURL];
             aladdinRestClient = new RestClient(aladdinUrl);
         }
@@ -41,62 +41,62 @@ namespace BarterBuddy.Presentation.Web.Controllers
         /// <exception cref="System.ArgumentNullException">filterContext</exception>
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            if (filterContext == null)
-            {
-                throw new ArgumentNullException("filterContext");
-            }
+            //if (filterContext == null)
+            //{
+            //    throw new ArgumentNullException("filterContext");
+            //}
 
-            var ctx = System.Web.HttpContext.Current;
+            //var ctx = System.Web.HttpContext.Current;
 
-            // If the browser session or authentication session has expired...
-            if (ctx.Session.IsNewSession &&
-                  !((filterContext.RouteData.Values["Controller"].ToString() == "Login" &&
-                    filterContext.RouteData.Values["Action"].ToString() == "Index")))
-            {
-                if (SiteSession.CurrentSession.UserName == null)
-                {
-                    Session.RemoveAll();
-                    Session.Abandon();
-                    if (Request.Cookies["Culture"] != null)
-                    {
-                        SiteSession.CurrentSession.Culture = Request.Cookies["Culture"].Value;
-                    }
-                    Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", string.Empty));
-                    if (filterContext.HttpContext.Request.IsAjaxRequest())
-                    {
-                        // For AJAX requests, we're overriding the returned JSON result with a simple string,
-                        // indicating to the calling JavaScript code that a redirect should be performed.
+            //// If the browser session or authentication session has expired...
+            //if (ctx.Session.IsNewSession &&
+            //      !((filterContext.RouteData.Values["Controller"].ToString() == "Login" &&
+            //        (filterContext.RouteData.Values["Action"].ToString() == "Login" || filterContext.RouteData.Values["Action"].ToString() == "ValidateUserLogin"))))
+            //{
+            //    if (SiteSession.CurrentSession.UserName == null)
+            //    {
+            //        Session.RemoveAll();
+            //        Session.Abandon();
+            //        if (Request.Cookies["Culture"] != null)
+            //        {
+            //            SiteSession.CurrentSession.Culture = Request.Cookies["Culture"].Value;
+            //        }
+            //        Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", string.Empty));
+            //        if (filterContext.HttpContext.Request.IsAjaxRequest())
+            //        {
+            //            // For AJAX requests, we're overriding the returned JSON result with a simple string,
+            //            // indicating to the calling JavaScript code that a redirect should be performed.
 
-                        //filterContext.Result = new ContentResult { Content = "_Logon_" };
-                    }
-                    else
-                    {
-                        // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
-                        // simply displays a temporary 5 second notification that they have timed out, and
-                        // will, in turn, redirect to the logon page.
+            //            //filterContext.Result = new ContentResult { Content = "_Logon_" };
+            //        }
+            //        else
+            //        {
+            //            // For round-trip posts, we're forcing a redirect to Home/TimeoutRedirect/, which
+            //            // simply displays a temporary 5 second notification that they have timed out, and
+            //            // will, in turn, redirect to the logon page.
 
-                        if (ctx.Request.Url.ToString().Contains("/admin/adminpanel?id="))
-                        {
-                            // string companyId = HttpUtility.ParseQueryString(ctx.Request.Url.ToString())["id"];
-                            // filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "Controller", "WorkOrder" }, { "Action", "NewWorkRequest" }, { "id", companyId } });
-                            return;
-                        }
-                        else
-                        {
-                            var url = this.Request.Url;
-                            var returnUrl = string.Empty;
-                            if (url != null)
-                            {
-                                returnUrl = url.ToString();
-                            }
+            //            if (ctx.Request.Url.ToString().Contains("/admin/adminpanel?id="))
+            //            {
+            //                // string companyId = HttpUtility.ParseQueryString(ctx.Request.Url.ToString())["id"];
+            //                // filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary { { "Controller", "WorkOrder" }, { "Action", "NewWorkRequest" }, { "id", companyId } });
+            //                return;
+            //            }
+            //            else
+            //            {
+            //                var url = this.Request.Url;
+            //                var returnUrl = string.Empty;
+            //                if (url != null)
+            //                {
+            //                    returnUrl = url.ToString();
+            //                }
 
-                            filterContext.Result =
-                                    new RedirectToRouteResult(
-                                        new RouteValueDictionary { { "Controller", "Account" }, { "Action", "Login" }, { "returnUrl", returnUrl } });
-                        }
-                    }
-                }
-            }
+            //                filterContext.Result =
+            //                        new RedirectToRouteResult(
+            //                            new RouteValueDictionary { { "Controller", "Account" }, { "Action", "Login" }, { "returnUrl", returnUrl } });
+            //            }
+            //        }
+            //    }
+            //}
             //base.OnActionExecuting(filterContext);
         }
 
