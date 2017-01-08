@@ -6,7 +6,8 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BarterBuddy.Business.IBusness;
+using BarterBuddy.Business.IBusiness;
+using BarterBuddy.Business;
 using BarterBuddy.Common.Helper;
 using BarterBuddy.Common.IOC;
 using BarterBuddy.Presentation.Web.Models;
@@ -20,7 +21,7 @@ namespace BarterBuddy.Presentation.Web.Area.api
 
         public LoginController()
         {
-            loginManager = IOCHelper.Resolve<ILoginBusinessManager>();
+            loginManager = new LoginBusinessManager();
         }
 
         [HttpGet]
@@ -29,6 +30,7 @@ namespace BarterBuddy.Presentation.Web.Area.api
         {
             try
             {
+                
                 //var asset = await loginManager.GetAssetCustomFieldDetails(assetId, companyId, allowEdit, categoryId);
                 return Ok(new ResponseHelper { StatusCode = Enums.ResponseCode.Success });
             }
@@ -38,7 +40,6 @@ namespace BarterBuddy.Presentation.Web.Area.api
                 return InternalServerError(ex);
             }
         }
-
 
         [HttpGet]
         [Route("~/api/Login/GetDetail/{data}")]

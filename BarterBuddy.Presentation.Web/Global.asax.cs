@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BarterBuddy.Presentation.Web.Controllers;
+using BarterBuddy.Model;
 
 namespace BarterBuddy.Presentation.Web
 {
@@ -20,8 +21,7 @@ namespace BarterBuddy.Presentation.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-
+           
         }
 
         protected void Application_Error(object sender, EventArgs e)

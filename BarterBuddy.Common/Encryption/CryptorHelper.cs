@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 
 namespace BarterBuddy.Common.Encryption
 {
-    public class CryptorHelper
+    public static class CryptorHelper
     {
         /// <summary>
         /// Encrypt a string using dual encryption method. Return a encrypted cipher Text

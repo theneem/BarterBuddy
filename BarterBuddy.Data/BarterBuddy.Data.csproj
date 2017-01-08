@@ -30,11 +30,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\DLLs\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,12 +51,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarterBuddyEDMX\BarterBuddy.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarterBuddy.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BarterBuddyEDMX\BarterBuddy.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarterBuddy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BarterBuddyEDMX\BarterBuddy.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BarterBuddy.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="BarterBuddyEDMX\BBUser.cs">
+      <DependentUpon>BarterBuddy.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BarterBuddyEDMX\BBUserDetail.cs">
+      <DependentUpon>BarterBuddy.tt</DependentUpon>
+    </Compile>
     <Compile Include="IData\ILoginDataRepository.cs" />
     <Compile Include="LoginDataRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BarterBuddyEDMX\" />
+    <ProjectReference Include="..\BarterBuddy.Common\BarterBuddy.Common.csproj">
+      <Project>{8BBBD742-D345-49B9-B789-50E413EB290D}</Project>
+      <Name>BarterBuddy.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BarterBuddy.Model\BarterBuddy.Model.csproj">
+      <Project>{BE8E8BB1-7C08-4990-A386-2231F722F621}</Project>
+      <Name>BarterBuddy.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="BarterBuddyEDMX\BarterBuddy.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BarterBuddy.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="BarterBuddyEDMX\BarterBuddy.edmx.diagram">
+      <DependentUpon>BarterBuddy.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BarterBuddyEDMX\BarterBuddy.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BarterBuddy.edmx</DependentUpon>
+      <LastGenOutput>BarterBuddy.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="BarterBuddyEDMX\BarterBuddy.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BarterBuddy.edmx</DependentUpon>
+      <LastGenOutput>BarterBuddy.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

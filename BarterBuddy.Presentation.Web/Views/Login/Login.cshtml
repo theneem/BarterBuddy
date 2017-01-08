@@ -1,8 +1,8 @@
-﻿@using BarterBuddy.Presentation.Web.Models
-@{
-    @Html.Partial("_BlankLayout")
-}
+﻿@using BarterBuddy.Model;
+@model UserModel
 
+@Html.Partial("_BlankLayout");
+<script src="~/Scripts/ProjectScript/LoginModel.js"></script>
 <h2>@ViewBag.Title.</h2>
 <div class="home">
     <div class="wrapper">
@@ -11,7 +11,7 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12 logoMain">
-                            <a href="index.html" title="Barter Buddy"><img src="~/images/logo.png" alt="Barter Buddy" /></a>
+                            <a href="@Url.Action("~/Login/Login")" title="Barter Buddy"><img src="@Url.Content("~/images/logo.png")" /></a>
                         </div>
                         <div class="col-md-6 col-sm-6 col-xs-12 LoginRight">
                             <div class="loginMain">
@@ -43,7 +43,7 @@
                                                                     </div>
                                                                 </li>
                                                                 <li class="btnLi">
-                                                                    <button type="submit" title="Login" class="subBtn trans" id="submit_Btn"><span>Login</span></button>
+                                                                    <button type="submit" title="Login" class="subBtn trans" id="btnLogin"><span>Login</span></button>
                                                                 </li>
                                                             </ul>
                                                             <ul class="linkDir">
@@ -60,7 +60,9 @@
                                                                 <li class="emailMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Email</span>
-                                                                        <input type="email" name="txtlname" id="regEmail" class="txt" title="Email" />
+                                                                        @*<input type="email" name="txtlname" id="regEmail" class="txt" title="Email" />*@
+                                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(m => m.UserName)
                                                                     </div>
                                                                 </li>
                                                                 <li class="pwdMain">
@@ -80,7 +82,7 @@
                                                                     <label for="c1"><span></span>By Registering on BarterBuddy, you accept <a href="#" title="Terms & Conditions">Terms & Conditions</a></label>
                                                                 </li>
                                                                 <li class="btnLi">
-                                                                    <button type="submit" title="Register" class="subBtn trans"><span>Register</span></button>
+                                                                    <button type="submit" title="Register" id="btnRegister" class="subBtn trans"><span>Register</span></button>
                                                                 </li>
                                                             </ul>
                                                             <ul class="linkDir regDir">
@@ -101,7 +103,7 @@
                                     <span class="treS"></span>
                                 </div>
                                 <div class="menuHere">
-                                   @Html.Partial("DraggebleMenu");
+                                    @Html.Partial("DraggebleMenu");
                                 </div>
                             </div>
                         </div>
@@ -142,7 +144,7 @@
                                                         <div class="comBlue">
                                                             <a href="#" title="School" class="figA">
                                                                 <figure>
-                                                                    <img src="@Url.Content("~/Images/school.png")"  alt="School">
+                                                                    <img src="@Url.Content("~/Images/school.png")" alt="School">
                                                                     <img src="@Url.Content("~/images/school-hvr.png")" class="hoverImg" alt="School">
                                                                     <figcaption>School</figcaption>
                                                                 </figure>
@@ -151,8 +153,8 @@
                                                         <div class="comBlue">
                                                             <a href="#" title="Science" class="figA">
                                                                 <figure>
-                                                                    <img src= "@Url.Content("~/Images/sci.png")"  alt="Science">
-                                                                    <img src= "@Url.Content("~/Images/sci-hvr.png")" class="hoverImg" alt="Science">
+                                                                    <img src="@Url.Content("~/Images/sci.png")" alt="Science">
+                                                                    <img src="@Url.Content("~/Images/sci-hvr.png")" class="hoverImg" alt="Science">
                                                                     <figcaption>Science</figcaption>
                                                                 </figure>
                                                             </a>
@@ -696,3 +698,8 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    var urlPath = '@Url.Content("~/Login/")';
+</script>
+

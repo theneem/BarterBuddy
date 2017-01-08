@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BarterBuddy.Business.IBusness
+namespace BarterBuddy.Business.IBusiness
 {
-    public interface ILoginBusinessManager
+    public class ILoginBusinessManager
     {
     }
 }

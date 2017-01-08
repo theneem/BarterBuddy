@@ -122,8 +122,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="BarcodeHelper\BarcodeHelper.cs" />
     <Compile Include="Encryption\CryptorHelper.cs" />
     <Compile Include="Helper\Constant.cs" />
@@ -138,7 +136,9 @@
     <Compile Include="Rest\WebApiException.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
