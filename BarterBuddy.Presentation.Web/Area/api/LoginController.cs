@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BarterBuddy.Business.IBusiness;
 using BarterBuddy.Business;
-using BarterBuddy.Common.Helper;
-using BarterBuddy.Common.IOC;
-using BarterBuddy.Presentation.Web.Models;
+using BarterBuddy.Business.IBusiness;
+using BarterBuddy.Model;
 
 namespace BarterBuddy.Presentation.Web.Area.api
 {
@@ -18,21 +12,19 @@ namespace BarterBuddy.Presentation.Web.Area.api
     {
         private ILoginBusinessManager loginManager;
 
-
         public LoginController()
         {
             loginManager = new LoginBusinessManager();
         }
 
-        [HttpGet]
-        [Route("~/api/Login/ValidateUserLogin/{data}")]
-        public async Task<IHttpActionResult> ValidateUserLogin(LoginViewModel data)
+        [HttpPost]
+        [Route("~/api/Login/ValidateUser/{user}")]
+        public async Task<IHttpActionResult> ValidateUser(UserModel user)
         {
             try
             {
-                
-                //var asset = await loginManager.GetAssetCustomFieldDetails(assetId, companyId, allowEdit, categoryId);
-                return Ok(new ResponseHelper { StatusCode = Enums.ResponseCode.Success });
+                var result = await loginManager.ValidateUser(user);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -42,13 +34,45 @@ namespace BarterBuddy.Presentation.Web.Area.api
         }
 
         [HttpGet]
-        [Route("~/api/Login/GetDetail/{data}")]
-        public async Task<IHttpActionResult> GetDetail(int data)
+        [Route("~/api/Login/GetUserDetail/{user}")]
+        public async Task<IHttpActionResult> GetUserDetail(UserModel user)
         {
             try
             {
-                //var asset = await loginManager.GetAssetCustomFieldDetails(assetId, companyId, allowEdit, categoryId);
-                return Ok(new ResponseHelper { StatusCode = Enums.ResponseCode.Success });
+                var result = await loginManager.GetUserDetail(user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("~/api/Login/RegisterUser/{user}")]
+        public async Task<IHttpActionResult> RegisterUser(UserModel user)
+        {
+            try
+            {
+                var result = await loginManager.RegisterUser(user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("~/api/Login/UpdateProfile/{user}")]
+        public async Task<IHttpActionResult> UpdateProfile(UserModel user)
+        {
+            try
+            {
+                var result = await loginManager.UpdateProfile(user);
+                return Ok(result);
             }
             catch (Exception ex)
             {

@@ -10,6 +10,14 @@ namespace BarterBuddy.Common.Helper
     {
         public static string GETURL = "BarterAPIURL";
 
-        public static string VALIDATEUSERLOGIN = "Login/ValidateUserLogin/{0}";
+        public static string VALIDATEUSER = "Login/ValidateUser/{0}";
+
+        public static string GETUSERDETAIL = "Login/GetUserDetail/{0}";
+
+        public static string REGISTERUSER = "Login/RegisterUser/{0}";
+
+        public static string UPDATEPROFILE = "Login/UpdateProfile/{0}";
+
+        public static string ERROR = "Error";
     }
 }

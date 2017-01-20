@@ -11,6 +11,12 @@ namespace BarterBuddy.Data.IData
 {
     public interface ILoginDataRepository
     {
-        Task<ResponseHelper> RegisterUser(BBUser userModel);
+        Task<ResponseHelper> RegisterUserModel(UserModel userModel);
+
+        Task<ResponseHelper> ValidateUser(UserModel userModel);
+
+        Task<ResponseHelper> UpdateProfile(UserModel userModel);
+
+        Task<ResponseHelper> GetUserDetail(UserModel userModel);
     }
 }

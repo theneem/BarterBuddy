@@ -28,14 +28,14 @@
           <Property Name="Name" Type="varchar" MaxLength="500" />
         </EntityType>
         <Association Name="FK_BBUserDetails_BBUserDetails">
-          <End Role="BBUserDetails" Type="Self.BBUserDetails" Multiplicity="1" />
-          <End Role="BBUserDetails1" Type="Self.BBUserDetails" Multiplicity="0..1" />
+          <End Role="BBUser" Type="Self.BBUser" Multiplicity="1" />
+          <End Role="BBUserDetails" Type="Self.BBUserDetails" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BBUserDetails">
-              <PropertyRef Name="UserDetailID" />
+            <Principal Role="BBUser">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="BBUserDetails1">
-              <PropertyRef Name="UserDetailID" />
+            <Dependent Role="BBUserDetails">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -43,8 +43,8 @@
           <EntitySet Name="BBUser" EntityType="Self.BBUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BBUserDetails" EntityType="Self.BBUserDetails" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_BBUserDetails_BBUserDetails" Association="Self.FK_BBUserDetails_BBUserDetails">
+            <End Role="BBUser" EntitySet="BBUser" />
             <End Role="BBUserDetails" EntitySet="BBUserDetails" />
-            <End Role="BBUserDetails1" EntitySet="BBUserDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -64,6 +64,7 @@
           <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ModifidDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BBUserDetails" Relationship="Self.FK_BBUserDetails_BBUserDetails" FromRole="BBUser" ToRole="BBUserDetails" />
         </EntityType>
         <EntityType Name="BBUserDetail">
           <Key>
@@ -73,27 +74,26 @@
           <Property Name="UserID" Type="Int64" Nullable="false" />
           <Property Name="WhatsAppNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BBUserDetails1" Relationship="Self.FK_BBUserDetails_BBUserDetails" FromRole="BBUserDetails" ToRole="BBUserDetails1" />
-          <NavigationProperty Name="BBUserDetail1" Relationship="Self.FK_BBUserDetails_BBUserDetails" FromRole="BBUserDetails1" ToRole="BBUserDetails" />
+          <NavigationProperty Name="BBUser" Relationship="Self.FK_BBUserDetails_BBUserDetails" FromRole="BBUserDetails" ToRole="BBUser" />
         </EntityType>
         <Association Name="FK_BBUserDetails_BBUserDetails">
-          <End Role="BBUserDetails" Type="Self.BBUserDetail" Multiplicity="1" />
-          <End Role="BBUserDetails1" Type="Self.BBUserDetail" Multiplicity="0..1" />
+          <End Role="BBUser" Type="Self.BBUser" Multiplicity="1" />
+          <End Role="BBUserDetails" Type="Self.BBUserDetail" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="BBUserDetails">
-              <PropertyRef Name="UserDetailID" />
+            <Principal Role="BBUser">
+              <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="BBUserDetails1">
-              <PropertyRef Name="UserDetailID" />
+            <Dependent Role="BBUserDetails">
+              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="barterbuddyEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="BarterBuddyContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BBUsers" EntityType="Self.BBUser" />
           <EntitySet Name="BBUserDetails" EntityType="Self.BBUserDetail" />
           <AssociationSet Name="FK_BBUserDetails_BBUserDetails" Association="Self.FK_BBUserDetails_BBUserDetails">
+            <End Role="BBUser" EntitySet="BBUsers" />
             <End Role="BBUserDetails" EntitySet="BBUserDetails" />
-            <End Role="BBUserDetails1" EntitySet="BBUserDetails" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -101,7 +101,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="barterbuddyModelStoreContainer" CdmEntityContainer="barterbuddyEntities">
+        <EntityContainerMapping StorageEntityContainer="barterbuddyModelStoreContainer" CdmEntityContainer="BarterBuddyContext">
           <EntitySetMapping Name="BBUsers">
             <EntityTypeMapping TypeName="barterbuddyModel.BBUser">
               <MappingFragment StoreEntitySet="BBUser">
@@ -142,7 +142,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

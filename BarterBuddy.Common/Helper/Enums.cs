@@ -20,5 +20,11 @@ namespace BarterBuddy.Common.Helper
             SGEAdmin = 1,
             TenentUser = 2
         }
+
+        public enum LoginPlatForm
+        {
+            System = 1,
+            mobile = 2
+        }
     }
 }

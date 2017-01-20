@@ -1,10 +1,18 @@
 ﻿@using BarterBuddy.Model;
+@using Newtonsoft.Json;
+@using BarterBuddy.Common.Helper;
 @model UserModel
 
-@Html.Partial("_BlankLayout");
+@Html.Partial("_BlankLayout")
 <script src="~/Scripts/ProjectScript/LoginModel.js"></script>
-<h2>@ViewBag.Title.</h2>
-<div class="home">
+@{
+    if (TempData[Constant.ERROR] != null)
+    {
+       
+    }
+}
+@Html.ValidationSummary(true)
+<body class="home">
     <div class="wrapper">
         <header>
             <div class="headerMain">
@@ -28,34 +36,38 @@
                                             <div class="accMainDiv">
                                                 <div class="accoContain current in" id="tab-1">
                                                     <div class="formHere">
-                                                        <form id="login" name="loginForm" method="post" onsubmit="return false;">
-                                                            <ul class="loginForm">
+                                                        @using (this.Html.BeginForm("ValidateUserLogin", "Login", FormMethod.Post, new { name = "ValidateUserLogin", id = "login" }))
+                                                        {
+                                                            <ul class="loginForm regForm">
                                                                 <li class="emailMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Email</span>
-                                                                        <input type="email" name="txtlname" id="txtemail" class="txt" title="Email" />
+                                                                        @*<input type="email" name="txtlname" id="txtemail" class="txt" title="Email" />*@
+                                                                        @Html.TextBoxFor(t => t.UserName, new { @class = "txt", @id = "txUserName", data_bind = "value: Name" })
+                                                                        @Html.ValidationMessageFor(t => t.UserName)
                                                                     </div>
                                                                 </li>
-                                                                <li class="whatsUpMain">
+                                                                <li class="pwdMain">
                                                                     <div class="txtMain">
-                                                                        <span class="placeSpan">Whatsapp Number</span>
-                                                                        <input type="tel" name="txtphone" id="txtwnum" class="txt" title="Whatsapp Number" maxlength="10" />
+                                                                        <span class="placeSpan">Password</span>
+                                                                        @Html.PasswordFor(t => t.Password, new { @class = "txt", @id = "txMobile", data_bind = "value: Name" })
+                                                                        @Html.ValidationMessageFor(t => t.Password)
                                                                     </div>
                                                                 </li>
                                                                 <li class="btnLi">
                                                                     <button type="submit" title="Login" class="subBtn trans" id="btnLogin"><span>Login</span></button>
                                                                 </li>
                                                             </ul>
-                                                            <ul class="linkDir">
+                                                            <ul class="linkDir regDir">
                                                                 <li><a href="#" target="_blank" title="Facebook" class="fb">Login with facebook</a></li>
-                                                                <li><a href="#" target="_blank" title="Google" class="google">Login with Google</a></li>
                                                             </ul>
-                                                        </form>
+                                                        }
                                                     </div>
                                                 </div>
                                                 <div class="accoContain" id="tab-2">
-                                                    <div class="formHere">
-                                                        <form id="regis" name="regForm" method="post" onsubmit="return false;">
+                                                    <div class="formHere" id="regis">
+                                                        @using (this.Html.BeginForm("RegisterUser", "Login", new { name = "RegisterUser" }))
+                                                        {
                                                             <ul class="loginForm regForm">
                                                                 <li class="emailMain">
                                                                     <div class="txtMain">
@@ -68,13 +80,16 @@
                                                                 <li class="pwdMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan ">Password</span>
-                                                                        <input type="password" name="txtfname" id="regName" class="txt" title="Password" />
+                                                                        @Html.PasswordFor(m => m.Password, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(m => m.Password)
                                                                     </div>
                                                                 </li>
                                                                 <li class="whatsUpMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Whatsapp Number (optional)</span>
-                                                                        <input type="tel" name="txtphone" id="regNum" class="txt" title="Whatsapp Number" maxlength="10" />
+                                                                        @*<input type="tel" name="txtphone" id="regNum" class="txt" title="Whatsapp Number" maxlength="10" />*@
+                                                                        @Html.TextBoxFor(t => t.MobileNo, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(t => t.MobileNo)
                                                                     </div>
                                                                 </li>
                                                                 <li>
@@ -88,13 +103,15 @@
                                                             <ul class="linkDir regDir">
                                                                 <li><a href="#" target="_blank" title="Facebook" class="fb">Register with facebook</a></li>
                                                             </ul>
-                                                        </form>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                  
                                 </div>
+                               
                             </div>
                             <div class="menuMain">
                                 <div class="menuIcon">
@@ -497,7 +514,7 @@
                                                      data-endspeed="500"
                                                      data-endeasing="Power4.easeIn"
                                                      style="z-index: 5">
-                                                    <img src="@Url.Content("~/mages/boy-2.png")" alt="">
+                                                    <img src="@Url.Content("~/Images/boy-2.png")" alt="">
                                                 </div>
                                                 <div class="tp-caption customin tp-resizeme"
                                                      data-x="center"
@@ -693,13 +710,11 @@
             </div>
         </footer>
     </div>
-</div>
+</body>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 
 <script>
     var urlPath = '@Url.Content("~/Login/")';
+    var loginException='@Html.Raw(string.IsNullOrEmpty(TempData[Constant.ERROR].ToString()))';
 </script>
 

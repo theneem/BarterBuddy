@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using FluentValidation.Attributes;
 namespace BarterBuddy.Model
 {
     public class UserModel
@@ -16,5 +16,7 @@ namespace BarterBuddy.Model
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public System.DateTime ModifidDate { get; set; }
+        public string MobileNo { get; set; }
+        public string Name { get; set; }
     }
 }

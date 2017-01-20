@@ -4,9 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6fe4cc8af248423c8036f1a3e30f3009" Name="Diagram1">
-        <EntityTypeShape EntityType="barterbuddyModel.BBUser" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="barterbuddyModel.BBUserDetail" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="ccff1ecb4ecf407b8c508ae458a8e23b" Name="Diagram1">
+        <EntityTypeShape EntityType="barterbuddyModel.BBUser" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="barterbuddyModel.BBUserDetail" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
         <AssociationConnector Association="barterbuddyModel.FK_BBUserDetails_BBUserDetails" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>

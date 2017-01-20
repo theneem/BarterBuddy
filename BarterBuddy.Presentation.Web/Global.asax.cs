@@ -9,6 +9,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using BarterBuddy.Presentation.Web.Controllers;
 using BarterBuddy.Model;
+using FluentValidation.Mvc;
 
 namespace BarterBuddy.Presentation.Web
 {
@@ -21,7 +22,6 @@ namespace BarterBuddy.Presentation.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-           
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -32,7 +32,8 @@ namespace BarterBuddy.Presentation.Web
             var currentRouteData = RouteTable.Routes.GetRouteData(new HttpContextWrapper(httpContext));
             if (currentRouteData != null)
             {
-                if (currentRouteData.Values["controller"] != null && !string.IsNullOrEmpty(currentRouteData.Values["controller"].ToString())){
+                if (currentRouteData.Values["controller"] != null && !string.IsNullOrEmpty(currentRouteData.Values["controller"].ToString()))
+                {
                     currentContrloller = currentRouteData.Values["controller"].ToString();
                 }
                 if (currentRouteData.Values["action"] != null && !string.IsNullOrEmpty(currentRouteData.Values["action"].ToString()))

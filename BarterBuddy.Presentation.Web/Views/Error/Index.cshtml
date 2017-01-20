@@ -1,3 +1,23 @@
-﻿<div>
-    <b>Error Occured</b>
-</div>
+﻿@using BarterBuddy.Resources.CommonResource
+@Html.Partial("_BlankLayout")
+<body class="home">
+    <div class="wrapper">
+        <header>
+            <div class="headerMain">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12 logoMain">
+                            <a href="@Url.Action("~/Login/Login")" title="Barter Buddy"><img src="@Url.Content("~/images/logo.png")" /></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 logoMain media-body">
+                            <h1 style="text-align:center">Something went wrong.</h1>
+                            <a href="@Url.Action("Login","Login")" class="subBtn trans">Home</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+</body>

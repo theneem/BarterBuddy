@@ -10,6 +10,7 @@ using BarterBuddy.Data;
 using AutoMapper;
 using BarterBuddy.Common.IOC;
 using BarterBuddy.Data.BarterBuddyEDMX;
+using BarterBuddy.Common.Helper;
 
 namespace BarterBuddy.Business
 {
@@ -17,14 +18,30 @@ namespace BarterBuddy.Business
     {
 
         private readonly ILoginDataRepository loginRepo;
+
         public LoginBusinessManager()
         {
             loginRepo = IOCHelper.Resolve<LoginDataRepository>();
         }
-        public void RegisterUser(UserModel user)
-        {
 
-            loginRepo.RegisterUser(Mapper.Map<BBUser>(user));
+        public async Task<ResponseHelper> GetUserDetail(UserModel userModel)
+        {
+            return await loginRepo.GetUserDetail(userModel);
+        }
+
+        public async Task<ResponseHelper> RegisterUser(UserModel userModel)
+        {
+            return await loginRepo.RegisterUserModel(userModel);
+        }
+
+        public async Task<ResponseHelper> UpdateProfile(UserModel userModel)
+        {
+           return await  loginRepo.UpdateProfile(userModel);
+        }
+
+        public async Task<ResponseHelper> ValidateUser(UserModel userModel)
+        {
+            return await loginRepo.ValidateUser(userModel);
         }
     }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BarterBuddy.Resources.CommonResource {
+namespace BarterBuddy.Resources.Common {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace BarterBuddy.Resources.CommonResource {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BarterBuddy.Resources.CommonResource.CommonResource", typeof(CommonResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("BarterBuddy.Resources.Common.CommonResource", typeof(CommonResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,15 +61,6 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email is Already Registered. Try Other!.
-        /// </summary>
-        public static string EmailAlreadyExist {
-            get {
-                return ResourceManager.GetString("EmailAlreadyExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Invalid Email Address.
         /// </summary>
         public static string InvalidEmailAddress {
@@ -79,7 +70,7 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid Mobile Number.
+        ///   Looks up a localized string similar to InvalidMobileNo.
         /// </summary>
         public static string InvalidMobileNo {
             get {
@@ -88,25 +79,16 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Invalid UserName or Password.
+        ///   Looks up a localized string similar to Page Not Found.
         /// </summary>
-        public static string InvalidUserPassword {
+        public static string PageNotExist {
             get {
-                return ResourceManager.GetString("InvalidUserPassword", resourceCulture);
+                return ResourceManager.GetString("PageNotExist", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mobile is Already Registered.Try Other!.
-        /// </summary>
-        public static string MobileAlreadyExist {
-            get {
-                return ResourceManager.GetString("MobileAlreadyExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email Id Required.
+        ///   Looks up a localized string similar to Email Id.
         /// </summary>
         public static string RequiredEmailID {
             get {
@@ -115,7 +97,7 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password Required.
+        ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string RequiredPassword {
             get {
@@ -124,11 +106,11 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Something Went Wrong.
+        ///   Looks up a localized string similar to Ooopsss Something Is wrong.!.
         /// </summary>
-        public static string SomethingWentWrong {
+        public static string somethingiswrong {
             get {
-                return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
+                return ResourceManager.GetString("somethingiswrong", resourceCulture);
             }
         }
     }
