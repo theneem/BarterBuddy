@@ -29,7 +29,7 @@ namespace BarterBuddy.Business
             return await loginRepo.GetUserDetail(userModel);
         }
 
-        public async Task<ResponseHelper> RegisterUser(UserModel userModel)
+        public async Task<ResponseHelper> RegisterUser(UserRegisterModel userModel)
         {
             return await loginRepo.RegisterUserModel(userModel);
         }

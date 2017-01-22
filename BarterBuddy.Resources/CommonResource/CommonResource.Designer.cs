@@ -131,5 +131,14 @@ namespace BarterBuddy.Resources.CommonResource {
                 return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Check Terms &amp; Condition.
+        /// </summary>
+        public static string TermContion {
+            get {
+                return ResourceManager.GetString("TermContion", resourceCulture);
+            }
+        }
     }
 }

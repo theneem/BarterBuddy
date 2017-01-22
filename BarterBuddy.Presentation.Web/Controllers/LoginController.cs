@@ -15,6 +15,9 @@ using BarterBuddy.Business;
 using BarterBuddy.Business.IBusiness;
 using System.Configuration;
 using BarterBuddy.Common.Rest;
+using Newtonsoft.Json;
+using BarterBuddy.Presentation.Web.Common;
+using System.Web.Security;
 
 namespace BarterBuddy.Presentation.Web.Controllers
 {
@@ -41,40 +44,49 @@ namespace BarterBuddy.Presentation.Web.Controllers
         }
 
         // GET: /Account/Login
-        public ActionResult Login(string returnUrl)
+        public ActionResult Login()
         {
-            ViewBag.ReturnUrl = returnUrl;
-            TempData[Constant.ERROR] = "";
-            return View(new UserModel());
+            return View(new LoginModel());
         }
 
 
         [HttpPost]
-        public async Task<ActionResult> ValidateUserLogin(UserModel user)
+        public async Task<ActionResult> ValidateUserLogin(LoginModel user)
         {
-            user.Password = CryptorHelper.Encrypt(user.Password, true);
-            var result = await aladdinRestClient.PostAsync<UserModel, ResponseHelper>(Constant.VALIDATEUSER, user, false);
+            user.LoginUser.Password = CryptorHelper.Encrypt(user.LoginUser.Password, true);
+            var result = await aladdinRestClient.PostAsync<UserModel, ResponseHelper>(Constant.VALIDATEUSER, user.LoginUser, false);
 
-            if (result.StatusCode == Enums.ResponseCode.Error)
+            if (result.StatusCode == Enums.ResponseCode.Success)
             {
-                TempData[Constant.ERROR] = result.Message;
+
+                var userModel = JsonConvert.DeserializeObject<UserModel>(result.Payload.ToString());
+                SiteSession.CurrentSession.UserId = userModel.UserID;
+                SiteSession.CurrentSession.UserName = userModel.UserName;
+                SiteSession.CurrentSession.UserRoleId = userModel.LoginType;
+                FormsAuthentication.SetAuthCookie(SiteSession.CurrentSession.UserName, true);
             }
 
-            return View("Login",new UserModel());
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public async Task<ActionResult> RegisterUser(UserModel userModel)
+        public async Task<ActionResult> RegisterUser(LoginModel userModel)
         {
-            userModel.Password = CryptorHelper.Encrypt(userModel.Password, true);
-            var result = await aladdinRestClient.PostAsync<UserModel, ResponseHelper>(Constant.REGISTERUSER, userModel, false);
+            userModel.RegisterUser.Password = CryptorHelper.Encrypt(userModel.RegisterUser.Password, true);
+            var result = await aladdinRestClient.PostAsync<UserRegisterModel, ResponseHelper>(Constant.REGISTERUSER, userModel.RegisterUser, false);
 
             if (result.StatusCode == Enums.ResponseCode.Error)
             {
-                TempData[Constant.ERROR] = result.Message;
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
 
-            return View("Login", new UserModel());
+            return RedirectToAction("Profile", "Account", JsonConvert.DeserializeObject<UserModel>(result.Payload.ToString()));
+        }
+
+        public  ActionResult Logout()
+        {
+
+            return RedirectToAction("Login", "Login");
         }
     }
 }

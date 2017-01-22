@@ -302,7 +302,7 @@ span.treS{width: 22px;}
 /*accordian end here*/
 /*checkbox start here*/
 input[type="checkbox"] {
-    display:none;
+    display:block;
 }
 
 input[type="checkbox"] + label {

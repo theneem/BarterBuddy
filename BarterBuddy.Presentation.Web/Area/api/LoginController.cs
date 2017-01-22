@@ -51,7 +51,7 @@ namespace BarterBuddy.Presentation.Web.Area.api
 
         [HttpPost]
         [Route("~/api/Login/RegisterUser/{user}")]
-        public async Task<IHttpActionResult> RegisterUser(UserModel user)
+        public async Task<IHttpActionResult> RegisterUser(UserRegisterModel user)
         {
             try
             {

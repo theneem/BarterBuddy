@@ -10,7 +10,7 @@ namespace BarterBuddy.Business.IBusiness
 {
     public interface ILoginBusinessManager
     {
-        Task<ResponseHelper> RegisterUser(UserModel userModel);
+        Task<ResponseHelper> RegisterUser(UserRegisterModel userModel);
 
         Task<ResponseHelper> ValidateUser(UserModel userModel);
 

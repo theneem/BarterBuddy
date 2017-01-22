@@ -4,16 +4,35 @@
 }
 <html>
 <head>
-  
 </head>
 <body>
-
+   
+    <div class="headerMain">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12 logoMain">
+                    <a href="@Url.Action("~/Login/Login")" title="Barter Buddy"><img src="@Url.Content("~/images/logo.png")" /></a>
+                </div>
+                <div  class="col-md-6 col-sm-6 col-xs-12 LoginRight ">
+                    <div class="menuMain">
+                        <div class="menuIcon">
+                            <span class="oneS"></span>
+                            <span class="twoS"></span>
+                            <span class="treS"></span>
+                        </div>
+                        <div class="menuHere" style="text-align:right">
+                            @Html.Partial("DraggebleMenu");
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container body-content">
         @RenderBody()
     </div>
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)*@
 </body>
 </html>

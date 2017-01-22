@@ -1,5 +1,21 @@
 ﻿@using BarterBuddy.Resources.CommonResource
 @Html.Partial("_BlankLayout")
+<style>
+    .errorDiv {
+        font: 700 125%/50px 'Raleway', sans-serif;
+        color: #ffffff;
+        position: relative;
+        background: #0aa6d1;
+        padding: 11px 60px 11px 29px;
+        border-radius: 7px;
+        border: 2px solid #0aa6d1;
+        transition: all 0.3s ease-in-out 0s;
+        -webkit-transition: all 0.3s ease-in-out 0s;
+    }
+    .media-body {
+    margin-top:20px;
+    }
+</style>
 <body class="home">
     <div class="wrapper">
         <header>
@@ -11,9 +27,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 logoMain media-body">
-                            <h1 style="text-align:center">Something went wrong.</h1>
-                            <a href="@Url.Action("Login","Login")" class="subBtn trans">Home</a>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-8 logoMain">
+                            <h1>Something went wrong.</h1>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5"></div>
+                        <div class="col-md-7 logoMain media-body">
+                            <a href="@Url.Action("Login","Login")" class="errorDiv trans">Home</a>
                         </div>
                     </div>
                 </div>

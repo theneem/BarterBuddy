@@ -1,15 +1,23 @@
-﻿<div class="table-menu">
+﻿@using BarterBuddy.Presentation.Web.Common;
+<div class="table-menu">
     <ul class="navMain">
         <li><a href="#" title="Home">Home</a></li>
         <li><a href="#" title="How it Works">How it Works</a></li>
         <li><a href="#" title="About - Contact Us">About - Contact Us</a></li>
         <li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
         <li><a href="#" title="Terms & Conditions">Terms & Conditions</a></li>
+        @{
+            if (!string.IsNullOrEmpty(SiteSession.CurrentSession.UserName))
+            {
+                <li>@Html.ActionLink("Logout", "Logout","Login")</li>
+            }
+        }
         <li class="socialIcon">
             <a href="#" title="Facebook" target="_blank" class="fbMenu"></a>
             <a href="#" title="LinkedIn" target="_blank" class="linkMenu"></a>
             <a href="#" title="Instagram" target="_blank" class="igMenu"></a>
             <a href="#" title="Twitter" target="_blank" class="twMenu"></a>
+           
         </li>
     </ul>
 </div>

@@ -7,38 +7,6 @@ var filterData;
 var Pageheight = 0;
 var numericReg = /^\d+(\.\d{1})??$/;
 var gridPager = [50, 100, 500, 1000];
-var gridDefaultPage = 50;
-var jqGridId = undefined;
-var counter = 60.00;
-var inveralTime = 1000000;
-var footertimer;
-$.fn.generateLeftMenu = function (url, data) {
-    var divId = this;
-    url = url + '?_=' + new Date().getTime();
-    window.geLocDataServices.GetData(url, data, function (data) { $(divId).html(data); $("#lblleftMenulicount").text($('#recentlyUL .clsli').length); leftPanelHeight(); $(".recently-update-list").ApplyCustomScrollBar(false); }, function () { })
-};
-
-$.fn.SetActiveTab = function () {
-    $('.nav-tabs a[href="#' + this[0].id + '"]').tab('show');
-};
-
-$.fn.SetEnableTab = function (flag) {
-    if (flag) {
-        $(this).find("a").attr("data-toggle", "tab");
-        $(this).removeClass("disabled");
-    }
-    else {
-        $(this).find("a").removeAttr("data-toggle");
-        $(this).addClass("disabled");
-        $(this).removeClass("ui-tabs-active");
-        $(this).removeClass("ui-state-active");
-    }
-    $('.nav-tabs a[href="#' + this[0].id + '"]').tab('show');
-};
-
-function GetActiveTab() {
-    return $('.nav-tabs .active a').attr('href');
-}
 
 var Messages = {
     // ReSharper disable UnusedParameter
@@ -159,34 +127,8 @@ var Messages = {
 
 };
 
-function ExportJQData(url, filteredData, extraParam) {
 
-    exportURL = url;
-    // ReSharper disable once AssignToImplicitGlobalInFunctionScope
-    extraParameter = GetExportColumns(extraParam);
-    filterData = filteredData;
-    $("#ExportDataModal").modal();
-    return false;
 
-}
-
-$(document).on("click", ".btnexportData", function () {
-    var url;
-    if (exportURL.length > 0) {
-        if (extraParameter != null && extraParameter != undefined && extraParameter !== "") {
-            url = exportURL + "?filter=" + filterData + "&formatType=" + $(this).attr("exporttype") + "&columnsList=" + extraParameter;
-        }
-        else {
-            if (exportURL.indexOf('?') > 0)
-                url = exportURL + "&filter=" + filterData + "&formatType=" + $(this).attr("exporttype");
-            else
-                url = exportURL + "?filter=" + filterData + "&formatType=" + $(this).attr("exporttype");
-        }
-        window.open(url, "MsgWindow");
-        $('#ExportDataModal').modal('hide');
-    }
-    filterData = "";
-});
 
 function ValidateControls() {
     $("#div").attr("required:true");

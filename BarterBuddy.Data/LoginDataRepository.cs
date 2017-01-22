@@ -37,7 +37,7 @@ namespace BarterBuddy.Data
             return helper;
         }
 
-        public async Task<ResponseHelper> RegisterUserModel(UserModel userModel)
+        public async Task<ResponseHelper> RegisterUserModel(UserRegisterModel userModel)
         {
             ResponseHelper helper = new ResponseHelper { StatusCode = Enums.ResponseCode.Success };
             try
@@ -45,8 +45,9 @@ namespace BarterBuddy.Data
                 using (var db = new BarterBuddyContext())
                 {
 
-                    var userEmailIdExists = db.BBUsers.Any(t => t.UserName == userModel.UserName);
-                    if (userEmailIdExists) {
+                    var userEmailIdExists = db.BBUsers.Any(t => t.UserName == userModel.EmailId);
+                    if (userEmailIdExists)
+                    {
                         helper.StatusCode = Enums.ResponseCode.Error;
                         helper.Message = CommonResource.EmailAlreadyExist;
                         return helper;
@@ -61,14 +62,13 @@ namespace BarterBuddy.Data
 
                     BBUser newUser = new BBUser
                     {
-                        UserName = userModel.UserName,
+                        UserName = userModel.EmailId,
                         Password = userModel.Password,
-                        LoginType = userModel.LoginType,
+                        LoginType = Enums.UserType.SGEAdmin.GetHashCode(),
                         CreatedBy = Enums.LoginPlatForm.System.ToString(),
                         ModifiedBy = Enums.LoginPlatForm.System.ToString(),
                         CreatedDate = DateTime.Now,
                         ModifidDate = DateTime.Now
-
                     };
 
                     db.BBUsers.Add(newUser);
@@ -76,7 +76,7 @@ namespace BarterBuddy.Data
                     BBUserDetail newUserDetail = new BBUserDetail
                     {
                         UserID = newUser.UserID,
-                        Name = userModel.Name,
+                        Name = userModel.EmailId,
                         WhatsAppNumber = userModel.MobileNo
                     };
 
@@ -133,6 +133,18 @@ namespace BarterBuddy.Data
                     {
                         helper.StatusCode = Enums.ResponseCode.Error;
                         helper.Message = CommonResource.InvalidUserPassword;
+                    }
+                    else
+                    {
+                        var user = db.BBUsers.First(t => t.UserName == userModel.UserName && t.Password == userModel.Password);
+                        if (user != null) {
+                            helper.Payload = new UserModel {
+                                UserID = user.UserID,
+                                UserName = user.UserName,
+                                Password = user.Password,
+                                LoginType = user.LoginType,
+                            };
+                        }
                     }
                 }
             }

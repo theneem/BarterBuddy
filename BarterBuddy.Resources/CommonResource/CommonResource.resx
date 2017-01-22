@@ -141,4 +141,7 @@
   <data name="SomethingWentWrong" xml:space="preserve">
     <value>Something Went Wrong</value>
   </data>
+  <data name="TermContion" xml:space="preserve">
+    <value>Please Check Terms &amp; Condition</value>
+  </data>
 </root>
