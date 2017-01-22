@@ -137,8 +137,10 @@ namespace BarterBuddy.Data
                     else
                     {
                         var user = db.BBUsers.First(t => t.UserName == userModel.UserName && t.Password == userModel.Password);
-                        if (user != null) {
-                            helper.Payload = new UserModel {
+                        if (user != null)
+                        {
+                            helper.Payload = new UserModel
+                            {
                                 UserID = user.UserID,
                                 UserName = user.UserName,
                                 Password = user.Password,

@@ -2,7 +2,7 @@
 @using Newtonsoft.Json;
 @using BarterBuddy.Common.Helper;
 @model LoginModel
-@{ 
+@{
     Layout = null;
 }
 @Html.Partial("_BlankLayout")
@@ -63,7 +63,8 @@
                                                                 </li>
                                                             </ul>
                                                             <ul class="linkDir regDir">
-                                                                <li><a href="#" target="_blank" title="Facebook" class="fb">Login with facebook</a></li>
+                                                                <li> @Html.ActionLink("Login with facebook", "ExternalLogin", "Account", new { @class = "fb" })</li>
+                                                                @*<li><a href="#" target="_blank" title="Facebook" class="fb"></a></li>*@
                                                             </ul>
                                                         </form>
                                                     </div>
@@ -97,8 +98,8 @@
                                                                 </li>
                                                                 <li>
                                                                     @*@Html.LabelFor(t => t.RegisterUser.isTerms)
-                                                                    @Html.CheckBoxFor(x => x.RegisterUser.isTerms)
-                                                                    @Html.ValidationMessageFor(x => x.RegisterUser.isTerms);*@
+                                                                        @Html.CheckBoxFor(x => x.RegisterUser.isTerms)
+                                                                        @Html.ValidationMessageFor(x => x.RegisterUser.isTerms);*@
 
                                                                     <input id="c1" name="cc" type="checkbox">
                                                                     <label for="c1"><span></span>By Registering on BarterBuddy, you accept <a href="#" title="Terms & Conditions">Terms & Conditions</a></label>

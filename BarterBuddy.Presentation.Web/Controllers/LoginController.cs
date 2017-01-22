@@ -54,39 +54,40 @@ namespace BarterBuddy.Presentation.Web.Controllers
         public async Task<ActionResult> ValidateUserLogin(LoginModel user)
         {
             user.LoginUser.Password = CryptorHelper.Encrypt(user.LoginUser.Password, true);
-            var result = await aladdinRestClient.PostAsync<UserModel, ResponseHelper>(Constant.VALIDATEUSER, user.LoginUser, false);
+            var responseHelper = await aladdinRestClient.PostAsync<UserModel, ResponseHelper>(Constant.VALIDATEUSER, user.LoginUser, false);
 
-            if (result.StatusCode == Enums.ResponseCode.Success)
+            if (responseHelper.StatusCode == Enums.ResponseCode.Success)
             {
 
-                var userModel = JsonConvert.DeserializeObject<UserModel>(result.Payload.ToString());
+                var userModel = JsonConvert.DeserializeObject<UserModel>(responseHelper.Payload.ToString());
                 SiteSession.CurrentSession.UserId = userModel.UserID;
                 SiteSession.CurrentSession.UserName = userModel.UserName;
                 SiteSession.CurrentSession.UserRoleId = userModel.LoginType;
-                FormsAuthentication.SetAuthCookie(SiteSession.CurrentSession.UserName, true);
+                FormsAuthentication.SetAuthCookie(SiteSession.CurrentSession.Authorization, true);
             }
 
-            return Json(result, JsonRequestBehavior.AllowGet);
+            return Json(responseHelper, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public async Task<ActionResult> RegisterUser(LoginModel userModel)
         {
             userModel.RegisterUser.Password = CryptorHelper.Encrypt(userModel.RegisterUser.Password, true);
-            var result = await aladdinRestClient.PostAsync<UserRegisterModel, ResponseHelper>(Constant.REGISTERUSER, userModel.RegisterUser, false);
+            var responseHelper = await aladdinRestClient.PostAsync<UserRegisterModel, ResponseHelper>(Constant.REGISTERUSER, userModel.RegisterUser, false);
 
-            if (result.StatusCode == Enums.ResponseCode.Error)
+            if (responseHelper.StatusCode == Enums.ResponseCode.Error)
             {
-                return Json(result, JsonRequestBehavior.AllowGet);
+                return Json(responseHelper, JsonRequestBehavior.AllowGet);
             }
 
-            return RedirectToAction("Profile", "Account", JsonConvert.DeserializeObject<UserModel>(result.Payload.ToString()));
-        }
 
-        public  ActionResult Logout()
-        {
+            var userDetail = JsonConvert.DeserializeObject<UserModel>(responseHelper.Payload.ToString());
 
-            return RedirectToAction("Login", "Login");
+            SiteSession.CurrentSession.UserId = userDetail.UserID;
+            SiteSession.CurrentSession.UserName = userDetail.UserName;
+            SiteSession.CurrentSession.UserRoleId = userDetail.LoginType;
+            FormsAuthentication.SetAuthCookie(SiteSession.CurrentSession.Authorization, true);
+            return RedirectToAction("Index", "Home", userDetail);
         }
     }
 }
