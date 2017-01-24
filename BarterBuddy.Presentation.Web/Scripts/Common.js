@@ -1,20 +1,9 @@
-﻿/// <reference path="SignalRSettings.js" />
-/// <reference path="../bootstrap.js" />
-var divId;
-var exportURL = "";
-var extraParameter;
-var filterData;
-var Pageheight = 0;
-var numericReg = /^\d+(\.\d{1})??$/;
-var gridPager = [50, 100, 500, 1000];
-
-var Messages = {
-    // ReSharper disable UnusedParameter
+﻿var Messages = {
     SuccessMessage: function (title, message) {
-        ////window.BootstrapDialog.show({
-        ////    title: title,
-        ////    message: message
-        ////});
+        window.BootstrapDialog.show({
+            title: title,
+            message: message
+        });
     },
     ErrorMessage: function (title, message) {
         if (message.length > 0) {

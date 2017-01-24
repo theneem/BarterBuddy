@@ -60,63 +60,12 @@
                 }
             });
         };
-
-        dataServices.prototype.GetDataProgress = function (url, dataObject, callBack, progresscallBack, errorCallback, isglobal) {
-            if (isglobal == undefined) {
-                isglobal = true;
-            }
-            $.ajax({
-                url: url,
-                type: 'get',
-                data: dataObject,
-                cache: false,
-                global: isglobal,
-                xhr: function () {
-                    var xhr = new window.XMLHttpRequest();
-                    // ReSharper disable Html.EventNotResolved
-                    xhr.upload.addEventListener("progress", function (evt) {
-                        if (evt.lengthComputable) {
-                            //var percentComplete = evt.loaded / evt.total;
-                            progresscallBack(evt.loaded / evt.total);
-                        }
-                    }, false);
-                    xhr.addEventListener("progress", function (evt) {
-                        if (evt.lengthComputable) {
-                            progresscallBack(evt.loaded / evt.total);
-                            //var percentComplete = evt.loaded / evt.total;
-                            //$('#ImportProgresslabel').html(percentComplete * 100 + '%')
-                            //$('.progressbarSlide').css({
-                            //    width: percentComplete * 100 + '%'
-                            //});
-                        }
-                    }, false);
-                    return xhr;
-                },
-
-                success: function (x) {
-                    if (x !== undefined && typeof (x) === "object" && x !== null) {
-
-                        if (x.hasOwnProperty("IsSuccess")) {
-
-                        }
-                    }
-                    callBack(x);
-                },
-                error: function (x, h, r) {
-                    if (x.status === 401 || x.status === 302 || x.status === 403) {
-                        window.location = window.ChangepasswordLoginURL;
-                    }
-                    else {
-                        errorCallback(x, h, r);
-                    }
-                }
-            });
-        };
-
         dataServices.prototype.PostData = function (url, dataObject, callBack, errorCallback, headers, isglobal) {
             if (isglobal == undefined) {
                 isglobal = true;
             }
+            $('#loadingDisplay').show(0);
+            $('#loadProgressBar').css('width', '50%').attr("aria-valuenow", 50);
             $.ajax({
                 url: url,
                 type: 'post',
@@ -124,7 +73,16 @@
                 cache: false,
                 headers: headers,
                 global: isglobal,
+                complete: function () {
+
+                    $('#loadProgressBar').css('width', '100%').attr("aria-valuenow", 100);
+                    $("#loadingDisplay").delay(500).fadeOut(20).queue(function (next) {
+                        $('#loadProgressBar').delay(1200).css('width', '0%').attr("aria-valuenow", 0);
+                        next();
+                    });
+                },
                 success: function (x) {
+                    $('#searchResults').delay(800).slideDown(500);
                     if (x !== undefined && typeof (x) === "object" && x !== null) {
                         if (x.hasOwnProperty("IsError") && x.IsError) {
                             $("#error-description").html(x.Message);
@@ -212,7 +170,8 @@
                 },
                 error: function (x, h, r) {
                     if (x.status === 401 || x.status === 302 || x.status === 403) {
-                        window.location = window.ChangepasswordLoginURL;
+                        Messages.ErrorMessage("Error", x.statusCode);
+                        //window.location = window.ChangepasswordLoginURL;
                     }
                     errorCallback(x, h, r);
                 }

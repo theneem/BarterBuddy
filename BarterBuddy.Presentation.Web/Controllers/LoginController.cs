@@ -89,5 +89,11 @@ namespace BarterBuddy.Presentation.Web.Controllers
             FormsAuthentication.SetAuthCookie(SiteSession.CurrentSession.Authorization, true);
             return RedirectToAction("Index", "Home", userDetail);
         }
+
+        public ActionResult Logout()
+        {
+            SiteSession.CurrentSession = null;
+            return RedirectToAction("Login", "Login");
+        }
     }
 }
