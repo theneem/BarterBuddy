@@ -10,13 +10,25 @@ using System.Web.Routing;
 using BarterBuddy.Presentation.Web.Controllers;
 using BarterBuddy.Model;
 using FluentValidation.Mvc;
+using BarterBuddy.Presentation.Web.Common;
+using BarterBuddy.Common.Rest;
+using System.Configuration;
+using BarterBuddy.Common.Helper;
 
 namespace BarterBuddy.Presentation.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        /// <summary>
+        /// The aladdin rest client
+        /// </summary>
+        public RestClient aladdinRestClient;
+
         protected void Application_Start()
         {
+            var aladdinUrl = ConfigurationManager.AppSettings[Constant.GETURL];
+            aladdinRestClient = new RestClient(aladdinUrl);
+
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -69,6 +81,11 @@ namespace BarterBuddy.Presentation.Web
                 controller.ViewData.Model = new HandleErrorInfo(ex, currentContrloller, currentAction);
             }
             ((IController)controller).Execute(new RequestContext(new HttpContextWrapper(httpContext), routeData));
+
+        }
+
+        void Session_End(Object sender, EventArgs E)
+        {
 
         }
     }

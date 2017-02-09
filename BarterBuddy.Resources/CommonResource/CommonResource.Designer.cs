@@ -61,6 +61,15 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Change SuccessFully.
+        /// </summary>
+        public static string ChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email is Already Registered. Try Other!.
         /// </summary>
         public static string EmailAlreadyExist {

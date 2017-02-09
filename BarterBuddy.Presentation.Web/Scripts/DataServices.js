@@ -64,8 +64,8 @@
             if (isglobal == undefined) {
                 isglobal = true;
             }
-            $('#loadingDisplay').show(0);
-            $('#loadProgressBar').css('width', '50%').attr("aria-valuenow", 50);
+            //$('#loadingDisplay').show(0);
+            //$('#loadProgressBar').css('width', '50%').attr("aria-valuenow", 50);
             $.ajax({
                 url: url,
                 type: 'post',
@@ -75,11 +75,11 @@
                 global: isglobal,
                 complete: function () {
 
-                    $('#loadProgressBar').css('width', '100%').attr("aria-valuenow", 100);
-                    $("#loadingDisplay").delay(500).fadeOut(20).queue(function (next) {
-                        $('#loadProgressBar').delay(1200).css('width', '0%').attr("aria-valuenow", 0);
-                        next();
-                    });
+                    //$('#loadProgressBar').css('width', '100%').attr("aria-valuenow", 100);
+                    //$("#loadingDisplay").delay(500).fadeOut(20).queue(function (next) {
+                    //    $('#loadProgressBar').delay(1200).css('width', '0%').attr("aria-valuenow", 0);
+                    //    next();
+                    //});
                 },
                 success: function (x) {
                     $('#searchResults').delay(800).slideDown(500);

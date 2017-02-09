@@ -10,5 +10,6 @@ namespace BarterBuddy.Model
     {
         public UserModel LoginUser { get; set; }
         public UserRegisterModel RegisterUser { get; set; }
+        public ResetPasswordUser ResetUser { get; set; }
     }
 }

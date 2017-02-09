@@ -245,10 +245,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Area\api\LoginController.cs" />
+    <Compile Include="Area\api\SettingsController.cs" />
     <Compile Include="Common\CachingProviderBase.cs" />
     <Compile Include="Common\GlobalCacheProvider.cs" />
+    <Compile Include="Common\MailHelper.cs" />
     <Compile Include="Common\SiteSession.cs" />
     <Compile Include="Common\ValidatorFactory.cs" />
     <Compile Include="Controllers\BaseController.cs" />
@@ -262,6 +265,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />

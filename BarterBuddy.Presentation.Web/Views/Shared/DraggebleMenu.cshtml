@@ -7,7 +7,7 @@
         <li><a href="#" title="Privacy Policy">Privacy Policy</a></li>
         <li><a href="#" title="Terms & Conditions">Terms & Conditions</a></li>
         @{
-            if (!string.IsNullOrEmpty(SiteSession.CurrentSession.UserName))
+            if (!string.IsNullOrEmpty(SiteSession.LoggedUsername))
             {
                 <li>@Html.ActionLink("Logout", "Logout","Login")</li>
             }

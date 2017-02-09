@@ -1,4 +1,5 @@
 ﻿@using BarterBuddy.Model;
+@using BarterBuddy.Resources.CommonResource;
 @using Newtonsoft.Json;
 @using BarterBuddy.Common.Helper;
 @model LoginModel
@@ -17,6 +18,39 @@
     }*/
 </style>
 @Html.ValidationSummary(true)
+<div id="forgetPassword" class="modal fade" role="dialog" style="display:none">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ForgetPassword</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmReset">
+                    <div class="row" id="resetPasswordError">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            UserName
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(t => t.ResetUser.userName, new { @class = "form-control", @id = "txForgetEmailUser" })
+                            @Html.ValidationMessageFor(t => t.ResetUser.userName)
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" title="Login" class="btn" id="btnReset"><span>Reset</span></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <body class="home">
     <div id="loadingDisplay" class="progressBarLoad" style="display:none">
         <h2>Loading...</h2>
@@ -735,4 +769,6 @@
     var urlPath = '@Url.Content("~/Login/")';
     var loginUrlPath = urlPath + "ValidateUserLogin";
     var registerUrlPath = urlPath + "RegisterUser";
+    var resetUrlPath = urlPath + "ResetPassword";
+    var changePasswordSuccessMsg = "New Password sent on your Registered MailBox";
 </script>

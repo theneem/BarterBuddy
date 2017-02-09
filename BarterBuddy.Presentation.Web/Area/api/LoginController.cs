@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using BarterBuddy.Business;
 using BarterBuddy.Business.IBusiness;
+using BarterBuddy.Common.IOC;
 using BarterBuddy.Model;
 
 namespace BarterBuddy.Presentation.Web.Area.api
@@ -14,7 +15,7 @@ namespace BarterBuddy.Presentation.Web.Area.api
 
         public LoginController()
         {
-            loginManager = new LoginBusinessManager();
+            loginManager = IOCHelper.Resolve<LoginBusinessManager>();
         }
 
         [HttpPost]
@@ -72,6 +73,22 @@ namespace BarterBuddy.Presentation.Web.Area.api
             try
             {
                 var result = await loginManager.UpdateProfile(user);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Trace.TraceError(ex.Message);
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        [Route("~/api/Login/ResetPassword/{user}")]
+        public async Task<IHttpActionResult> ResetPassword(ResetPasswordUser user)
+        {
+            try
+            {
+                var result = await loginManager.ResetPassword(user);
                 return Ok(result);
             }
             catch (Exception ex)

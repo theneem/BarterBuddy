@@ -45,7 +45,7 @@ namespace BarterBuddy.Data
                 using (var db = new BarterBuddyContext())
                 {
 
-                    var userEmailIdExists = db.BBUsers.Any(t => t.UserName == userModel.EmailId);
+                    var userEmailIdExists = db.BBUsers.Any(t => t.UserName == userModel.EmailId.Trim());
                     if (userEmailIdExists)
                     {
                         helper.StatusCode = Enums.ResponseCode.Error;
@@ -62,7 +62,7 @@ namespace BarterBuddy.Data
 
                     BBUser newUser = new BBUser
                     {
-                        UserName = userModel.EmailId,
+                        UserName = userModel.EmailId.Trim(),
                         Password = userModel.Password,
                         LoginType = Enums.UserType.SGEAdmin.GetHashCode(),
                         CreatedBy = Enums.LoginPlatForm.System.ToString(),
@@ -76,13 +76,21 @@ namespace BarterBuddy.Data
                     BBUserDetail newUserDetail = new BBUserDetail
                     {
                         UserID = newUser.UserID,
-                        Name = userModel.EmailId,
+                        Name = userModel.EmailId.Trim(),
                         WhatsAppNumber = userModel.MobileNo
                     };
 
                     db.BBUserDetails.Add(newUserDetail);
                     db.SaveChanges();
-                    helper.Payload = newUserDetail.UserDetailID;
+
+                    var returnUser = new UserModel
+                    {
+                        UserID = newUser.UserID,
+                        UserName = newUser.UserName,
+                        LoginType = Enums.UserType.SGEAdmin.GetHashCode()
+                    };
+
+                    helper.Payload = returnUser;
                 }
             }
             catch (Exception ex)
@@ -110,6 +118,38 @@ namespace BarterBuddy.Data
                     userObject.ModifidDate = userModel.CreatedDate;
                     db.BBUsers.Attach(userObject);
                     db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                helper.StatusCode = Enums.ResponseCode.Error;
+                helper.Message = ex.Message.ToString();
+            }
+
+            return helper;
+        }
+
+        public async Task<ResponseHelper> ResetPassword(ResetPasswordUser userModel)
+        {
+            ResponseHelper helper = new ResponseHelper { StatusCode = Enums.ResponseCode.Success };
+            try
+            {
+                using (var db = new BarterBuddyContext())
+                {
+                    var isExists = db.BBUsers.Any(t => t.UserName == userModel.userName);
+                    if (!isExists)
+                    {
+                        helper.StatusCode = Enums.ResponseCode.Error;
+                        helper.Message = CommonResource.InvalidEmailAddress;
+                    }
+                    else
+                    {
+                        var userObject = db.BBUsers.First(t => t.UserName == userModel.userName);
+                        userObject.UserName = userModel.userName;
+                        userObject.Password = userModel.password;
+                        db.BBUsers.Attach(userObject);
+                        db.SaveChanges();
+                    }
                 }
             }
             catch (Exception ex)

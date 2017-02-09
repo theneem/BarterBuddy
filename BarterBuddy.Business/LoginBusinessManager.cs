@@ -39,6 +39,11 @@ namespace BarterBuddy.Business
            return await  loginRepo.UpdateProfile(userModel);
         }
 
+        public async Task<ResponseHelper> ResetPassword(ResetPasswordUser userModel)
+        {
+            return await loginRepo.ResetPassword(userModel);
+        }
+
         public async Task<ResponseHelper> ValidateUser(UserModel userModel)
         {
             return await loginRepo.ValidateUser(userModel);

@@ -5000,10 +5000,10 @@ a.thumbnail:focus {
 
 .alert {
   padding: 5px;
-  text-align:center;
-  margin-bottom: 0px;
+  text-align:left;
+  margin-bottom: 10px;
   border: 1px solid transparent;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
 }
 
 .alert h4 {

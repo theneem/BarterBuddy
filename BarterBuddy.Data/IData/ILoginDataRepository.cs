@@ -17,6 +17,8 @@ namespace BarterBuddy.Data.IData
 
         Task<ResponseHelper> UpdateProfile(UserModel userModel);
 
+        Task<ResponseHelper> ResetPassword(ResetPasswordUser userModel);
+
         Task<ResponseHelper> GetUserDetail(UserModel userModel);
     }
 }

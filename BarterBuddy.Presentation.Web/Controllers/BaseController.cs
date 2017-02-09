@@ -53,14 +53,10 @@ namespace BarterBuddy.Presentation.Web.Controllers
             //       (filterContext.RouteData.Values["Action"].ToString() == "Login" || filterContext.RouteData.Values["Action"].ToString() == "ValidateUserLogin"))))
 
 
-            if (SiteSession.CurrentSession.UserName == null)
+            if (SiteSession.LoggedUsername == null)
             {
                 Session.RemoveAll();
                 Session.Abandon();
-                if (Request.Cookies["Culture"] != null)
-                {
-                    SiteSession.CurrentSession.Culture = Request.Cookies["Culture"].Value;
-                }
                 Response.Cookies.Add(new HttpCookie("ASP.NET_SessionId", string.Empty));
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
@@ -101,40 +97,7 @@ namespace BarterBuddy.Presentation.Web.Controllers
         /// <param name="filterContext">Information about the current request and action.</param>
         protected override void OnAuthorization(System.Web.Mvc.AuthorizationContext filterContext)
         {
-            string[] suppportedlanguages = { "en-us", "ar-AE" };
-            if (SiteSession.CurrentSession != null)
-            {
-
-                SiteSession.CurrentSession.Culture = "en-us";
-                if (!string.IsNullOrEmpty(SiteSession.CurrentSession.Culture))
-                {
-                    SetCulture(SiteSession.CurrentSession.Culture);
-                }
-            }
-            else
-            {
-                string culture = string.Empty;
-                if (Request.Cookies["Culture"] != null)
-                {
-                    culture = Request.Cookies["Culture"].Value;
-                }
-                if (suppportedlanguages.Any(x => x.ToLower() == culture.ToLower()))
-                {
-                    SiteSession.CurrentSession.Culture = culture;
-                    SetCulture(SiteSession.CurrentSession.Culture);
-                }
-            }
-        }
-
-        public void SetCulture(string langCode)
-        {
-            var ci = new System.Globalization.CultureInfo(langCode);
-            if (ci.IsNeutralCulture)
-            {
-                ci = CultureInfo.CreateSpecificCulture(langCode);
-            }
-            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture = ci;
-            SiteSession.CurrentSession.Culture = langCode;
+           
         }
     }
 }
