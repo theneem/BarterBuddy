@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_BlankLayout.cshtml";
 }
 
-@using BarterBuddy.Resources.Common;
+@using BarterBuddy.Resources.CommonResource;
 <div class="container">
     <div id="error" class="col-md-9 col-md-offset-2">
         <div class="media">
@@ -14,8 +14,8 @@
                 </div>
             </div>
             <div class="media-body">
-                <h1>@CommonResource.somethingiswrong</h1>
-                <h4>@CommonResource.PageNotExist</h4>
+                 @*<h1>@CommonResource.somethingiswrong</h1>
+                <h4>@CommonResource.PageNotExist</h4>*@ 
                 <a href="@Url.Action("Login","Login")" class="button">home0</a>
             </div>
         </div>
