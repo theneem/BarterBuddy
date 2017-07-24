@@ -24,6 +24,8 @@ namespace BarterBuddy.Presentation.Web.Common
         public void AddBinding()
         {
             kernel.Bind<IValidator<UserModel>>().To<UserModelValidator>();
+            kernel.Bind<IValidator<ResetPasswordUser>>().To<ResetPasswordModelValidator>();
+            kernel.Bind<IValidator<UserRegisterModel>>().To<UserRegisterModelValidator>();
         }
 
         /// <summary>

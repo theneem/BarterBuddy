@@ -1,18 +1,63 @@
 ﻿@using BarterBuddy.Model;
+@using BarterBuddy.Resources.CommonResource;
 @using Newtonsoft.Json;
 @using BarterBuddy.Common.Helper;
-@model UserModel
-
+@model LoginModel
+@{
+    Layout = null;
+}
 @Html.Partial("_BlankLayout")
 <script src="~/Scripts/ProjectScript/LoginModel.js"></script>
-@{
-    if (TempData[Constant.ERROR] != null)
-    {
-       
+<style>
+    .modal {
+        z-index: 999999999999999999999 !important;
     }
-}
+    /*.button.close {
+    padding-top:20px;
+    padding-right:20px;
+    }*/
+</style>
 @Html.ValidationSummary(true)
+<div id="forgetPassword" class="modal fade" role="dialog" style="display:none">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ForgetPassword</h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmReset">
+                    <div class="row" id="resetPasswordError">
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            UserName
+                        </div>
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(t => t.ResetUser.userName, new { @class = "form-control", @id = "txForgetEmailUser" })
+                            @Html.ValidationMessageFor(t => t.ResetUser.userName)
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" title="Login" class="btn" id="btnReset"><span>Reset</span></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <body class="home">
+    <div id="loadingDisplay" class="progressBarLoad" style="display:none">
+        <h2>Loading...</h2>
+        <div class="progress progress-striped ">
+            <div id="loadProgressBar" class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 20%"></div>
+        </div>
+    </div>
     <div class="wrapper">
         <header>
             <div class="headerMain">
@@ -36,82 +81,83 @@
                                             <div class="accMainDiv">
                                                 <div class="accoContain current in" id="tab-1">
                                                     <div class="formHere">
-                                                        @using (this.Html.BeginForm("ValidateUserLogin", "Login", FormMethod.Post, new { name = "ValidateUserLogin", id = "login" }))
-                                                        {
+                                                        <form id="login">
                                                             <ul class="loginForm regForm">
                                                                 <li class="emailMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Email</span>
                                                                         @*<input type="email" name="txtlname" id="txtemail" class="txt" title="Email" />*@
-                                                                        @Html.TextBoxFor(t => t.UserName, new { @class = "txt", @id = "txUserName", data_bind = "value: Name" })
-                                                                        @Html.ValidationMessageFor(t => t.UserName)
+                                                                        @Html.TextBoxFor(t => t.LoginUser.UserName, new { @class = "txt", @id = "txUserName" })
+                                                                        @Html.ValidationMessageFor(t => t.LoginUser.UserName)
                                                                     </div>
                                                                 </li>
                                                                 <li class="pwdMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Password</span>
-                                                                        @Html.PasswordFor(t => t.Password, new { @class = "txt", @id = "txMobile", data_bind = "value: Name" })
-                                                                        @Html.ValidationMessageFor(t => t.Password)
+                                                                        @Html.PasswordFor(t => t.LoginUser.Password, new { @class = "txt", @id = "txPassword" })
+                                                                        @Html.ValidationMessageFor(t => t.LoginUser.Password)
                                                                     </div>
                                                                 </li>
                                                                 <li class="btnLi">
-                                                                    <button type="submit" title="Login" class="subBtn trans" id="btnLogin"><span>Login</span></button>
+                                                                    <button type="button" title="Login" class="subBtn trans" id="btnLogin"><span>Login</span></button>
                                                                 </li>
                                                             </ul>
                                                             <ul class="linkDir regDir">
-                                                                <li><a href="#" target="_blank" title="Facebook" class="fb">Login with facebook</a></li>
+                                                                <li> @Html.ActionLink("Login with facebook", "ExternalLogin", "Account", new { @class = "fb" })</li>
+                                                                @*<li><a href="#" target="_blank" title="Facebook" class="fb"></a></li>*@
                                                             </ul>
-                                                        }
+                                                        </form>
                                                     </div>
                                                 </div>
                                                 <div class="accoContain" id="tab-2">
-                                                    <div class="formHere" id="regis">
-                                                        @using (this.Html.BeginForm("RegisterUser", "Login", new { name = "RegisterUser" }))
-                                                        {
+                                                    <div class="formHere">
+                                                        <form id="regis">
                                                             <ul class="loginForm regForm">
                                                                 <li class="emailMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Email</span>
                                                                         @*<input type="email" name="txtlname" id="regEmail" class="txt" title="Email" />*@
-                                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "txt" })
-                                                                        @Html.ValidationMessageFor(m => m.UserName)
+                                                                        @Html.TextBoxFor(t => t.RegisterUser.EmailId, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(t => t.RegisterUser.EmailId)
                                                                     </div>
                                                                 </li>
                                                                 <li class="pwdMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan ">Password</span>
-                                                                        @Html.PasswordFor(m => m.Password, new { @class = "txt" })
-                                                                        @Html.ValidationMessageFor(m => m.Password)
+                                                                        @Html.PasswordFor(t => t.RegisterUser.Password, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(t => t.RegisterUser.Password)
                                                                     </div>
                                                                 </li>
                                                                 <li class="whatsUpMain">
                                                                     <div class="txtMain">
                                                                         <span class="placeSpan">Whatsapp Number (optional)</span>
                                                                         @*<input type="tel" name="txtphone" id="regNum" class="txt" title="Whatsapp Number" maxlength="10" />*@
-                                                                        @Html.TextBoxFor(t => t.MobileNo, new { @class = "txt" })
-                                                                        @Html.ValidationMessageFor(t => t.MobileNo)
+                                                                        @Html.TextBoxFor(t => t.RegisterUser.MobileNo, new { @class = "txt" })
+                                                                        @Html.ValidationMessageFor(t => t.RegisterUser.MobileNo)
                                                                     </div>
                                                                 </li>
                                                                 <li>
+                                                                    @*@Html.LabelFor(t => t.RegisterUser.isTerms)
+                                                                        @Html.CheckBoxFor(x => x.RegisterUser.isTerms)
+                                                                        @Html.ValidationMessageFor(x => x.RegisterUser.isTerms);*@
+
                                                                     <input id="c1" name="cc" type="checkbox">
                                                                     <label for="c1"><span></span>By Registering on BarterBuddy, you accept <a href="#" title="Terms & Conditions">Terms & Conditions</a></label>
                                                                 </li>
                                                                 <li class="btnLi">
-                                                                    <button type="submit" title="Register" id="btnRegister" class="subBtn trans"><span>Register</span></button>
+                                                                    <button type="button" title="Register" id="btnRegister" class="subBtn trans"><span>Register</span></button>
                                                                 </li>
                                                             </ul>
                                                             <ul class="linkDir regDir">
                                                                 <li><a href="#" target="_blank" title="Facebook" class="fb">Register with facebook</a></li>
                                                             </ul>
-                                                        }
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                  
                                 </div>
-                               
                             </div>
                             <div class="menuMain">
                                 <div class="menuIcon">
@@ -691,6 +737,12 @@
                                 </div>
                             </div>
                         </div>
+                        <ul class="slider-dots">
+                            <li class="dot active">1</li>
+                            <li class="dot">2</li>
+                            <li class="dot">3</li>
+                            <li class="dot">4</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -715,6 +767,8 @@
 
 <script>
     var urlPath = '@Url.Content("~/Login/")';
-    var loginException='@Html.Raw(string.IsNullOrEmpty(TempData[Constant.ERROR].ToString()))';
+    var loginUrlPath = urlPath + "ValidateUserLogin";
+    var registerUrlPath = urlPath + "RegisterUser";
+    var resetUrlPath = urlPath + "ResetPassword";
+    var changePasswordSuccessMsg = "New Password sent on your Registered MailBox";
 </script>
-

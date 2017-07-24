@@ -8,8 +8,8 @@ namespace BarterBuddy.Model
 {
     public class LoginModel
     {
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
+        public UserModel LoginUser { get; set; }
+        public UserRegisterModel RegisterUser { get; set; }
+        public ResetPasswordUser ResetUser { get; set; }
     }
 }

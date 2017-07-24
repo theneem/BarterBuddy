@@ -28,8 +28,8 @@ textarea {
     font-size: 10px;
     position: absolute;
     white-space: nowrap;
-    bottom: -3px;
-    left: 0;
+    bottom: -25px;
+    left: 15px;
 }
 
 .field-validation-valid {

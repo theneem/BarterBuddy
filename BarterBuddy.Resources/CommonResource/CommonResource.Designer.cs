@@ -61,6 +61,15 @@ namespace BarterBuddy.Resources.CommonResource {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password Change SuccessFully.
+        /// </summary>
+        public static string ChangePasswordSuccess {
+            get {
+                return ResourceManager.GetString("ChangePasswordSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email is Already Registered. Try Other!.
         /// </summary>
         public static string EmailAlreadyExist {
@@ -129,6 +138,15 @@ namespace BarterBuddy.Resources.CommonResource {
         public static string SomethingWentWrong {
             get {
                 return ResourceManager.GetString("SomethingWentWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Check Terms &amp; Condition.
+        /// </summary>
+        public static string TermContion {
+            get {
+                return ResourceManager.GetString("TermContion", resourceCulture);
             }
         }
     }
