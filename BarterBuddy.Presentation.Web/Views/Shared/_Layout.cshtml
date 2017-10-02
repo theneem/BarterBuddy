@@ -34,11 +34,58 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+   @*  <div class="container body-content" he>
         @RenderBody()
     </div>
-    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/bootstrap")
         @RenderSection("scripts", required: false)*@
+
+    <section>
+        <div class="centerMain">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-5 col-sm-12 col-xs-12 blueMain ">
+                        
+
+                        @Html.Partial("_blueSquareMenu");
+                    </div>
+                    <div class="col-md-7 col-sm-12 col-xs-12">
+                        <div class="verMiddle">
+                            <div class="tp-banner-container">
+                                <div class="tp-banner">
+                                    <ul>
+                                        <!-- SLIDE  -->
+
+                                       
+                                        <div class="container body-content" he>
+                                            @RenderBody()
+                                        </div>
+
+                                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footerMain">
+            <div class="container-fluid">
+                <div class="col-md-6 col-xs-12 col-sm-6 copyMain">
+                    <div class="copyRight"
+                        <span> &copy; Buy Sale Books.com - </span><a href="#" title="Privacy Policy" class="trans">Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12 col-sm-6 workMain">
+                    <div class="howWork"><a href="#" class="trans howW">How it works...</a></div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
